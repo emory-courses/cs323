@@ -20,7 +20,7 @@ import edu.emory.mathcs.cs323.graph.Graph;
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public abstract class MaximumFlow
+public abstract class MFAlgorithm
 {
 	/**
 	 * @param graph a graph.

@@ -15,18 +15,16 @@
  */
 package edu.emory.mathcs.cs323.graph.flow;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import edu.emory.mathcs.cs323.graph.Edge;
 import edu.emory.mathcs.cs323.graph.Graph;
+import edu.emory.mathcs.cs323.graph.Subgraph;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class FordFulkerson extends MaximumFlow
+public class FordFulkerson extends MFAlgorithm
 {
 	/**
 	 * @param graph a graph.
@@ -37,16 +35,43 @@ public class FordFulkerson extends MaximumFlow
 	public MaxFlow getMaximumFlow(Graph graph, int source, int target)
 	{
 		MaxFlow mf = new MaxFlow(graph);
-		List<Edge> path;
+		Subgraph sub;
 		double min;
 		
-		while ((path = getPathDF(graph, mf, new ArrayList<>(), new HashSet<>(), source, target)) != null)
+		while ((sub = getAugmentingPath(graph, mf, new Subgraph(), source, target)) != null)
 		{
-			min = getMin(mf, path);
-			mf.updateResidual(path, min);
+			min = getMin(mf, sub.getEdges());
+			mf.updateResidual(sub.getEdges(), min);
+			updateBackward(graph, sub, mf, min);
 		}
 		
 		return mf;
+	}
+	
+	protected void updateBackward(Graph graph, Subgraph sub, MaxFlow mf, double min)
+	{
+		boolean found;
+		
+		for (Edge edge : sub.getEdges())
+		{
+			found = false;
+			
+			for (Edge rEdge : graph.getIncomingEdges(edge.getSource()))
+			{
+				if (rEdge.getSource() == edge.getTarget())
+				{
+					mf.updateResidual(rEdge, -min);
+					found = true;
+					break;
+				}
+			}
+			
+			if (!found)
+			{
+				Edge rEdge = graph.setDirectedEdge(edge.getTarget(), edge.getSource(), edge.getWeight());
+				mf.updateResidual(rEdge, -min);
+			}
+		}
 	}
 	
 	private double getMin(MaxFlow mf, List<Edge> path)
@@ -60,30 +85,22 @@ public class FordFulkerson extends MaximumFlow
 		return min;
 	}
 	
-	private List<Edge> getPathDF(Graph graph, MaxFlow mf, List<Edge> path, Set<Integer> visited, int source, int target) 
+	private Subgraph getAugmentingPath(Graph graph, MaxFlow mf, Subgraph sub, int source, int target) 
 	{
-		if (source == target) return path;
-		Set<Integer> set;
-		List<Edge> list;
+		if (source == target) return sub;
+		Subgraph tmp;
 		
 		for (Edge edge : graph.getIncomingEdges(target))
 		{
-			if (visited.contains(edge.getSource())) continue;	// cycle
-			if (mf.getResidual(edge) <= 0) continue;			// no capacity
-			list = new ArrayList<Edge>(path);
-			set  = new HashSet<Integer>(visited);
-			add(list, set, edge);
+			if (sub.contains(edge.getSource()))	continue;	// cycle
+			if (mf.getResidual(edge) <= 0)		continue;	// no residual
+			tmp = new Subgraph(sub);
+			tmp.addEdge(edge);
 			
-			list = getPathDF(graph, mf, list, set, source, edge.getSource());
-			if (list != null) return list;
+			tmp = getAugmentingPath(graph, mf, tmp, source, edge.getSource());
+			if (tmp != null) return tmp;
 		}
 		
 		return null;
-	}
-	
-	private void add(List<Edge> path, Set<Integer> visited, Edge edge)
-	{
-		path.add(edge);
-		visited.add(edge.getSource());
 	}
 }

@@ -15,7 +15,8 @@
  */
 package edu.emory.mathcs.cs323.graph.flow;
 
-import org.junit.Ignore;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 import edu.emory.mathcs.cs323.graph.Graph;
@@ -26,77 +27,72 @@ import edu.emory.mathcs.cs323.graph.Graph;
 public class FordFulkersonTest
 {
 	@Test
-	@Ignore
 	public void test()
 	{
-		Graph graph = new Graph(6);
+		MFAlgorithm mfa = new FordFulkerson();
+		Graph graph;
+		double mf;
 		
-		graph.setDirectedEdge(0, 1, 4);
-		graph.setDirectedEdge(0, 2, 2);
+		graph = getGraph0();
+		mf = test(mfa, graph, 0, graph.size()-1);
+		assertEquals(5, (int)mf);
+		
+		graph = getGraph1();
+		mf = test(mfa, graph, 0, graph.size()-1);
+		assertEquals(2, (int)mf);
+	}
+	
+	@Test
+	public void testUnDirected()
+	{
+		MFAlgorithm mfa = new FordFulkerson();
+		Graph graph;
+		double mf;
+		
+		graph = getGraph0();
+		mf = test(mfa, graph, 0, graph.size()-1);
+		assertEquals(5, (int)mf);
+		
+		graph = getGraph1();
+		mf = test(mfa, graph, 0, graph.size()-1);
+		assertEquals(2, (int)mf);
+	}
+	
+	double test(MFAlgorithm mfa, Graph graph, int source, int target)
+	{
+		MaxFlow m = mfa.getMaximumFlow(graph, source, target);
+		System.out.println(m.getFlowEdges().toString());
+		return m.getMaxFlow();
+	}
+	
+	Graph getGraph0()
+	{
+		Graph graph = new Graph(6);
+		int s = 0, t = 5;
+		
+		graph.setDirectedEdge(s, 1, 4);
+		graph.setDirectedEdge(s, 2, 2);
 		graph.setDirectedEdge(1, 3, 3);
 		graph.setDirectedEdge(2, 3, 2);
 		graph.setDirectedEdge(2, 4, 3);
 		graph.setDirectedEdge(3, 2, 1);
-		graph.setDirectedEdge(3, 5, 2);
-		graph.setDirectedEdge(4, 5, 4);
+		graph.setDirectedEdge(3, t, 2);
+		graph.setDirectedEdge(4, t, 4);
 		
-		FordFulkerson n = new FordFulkerson();
-		MaxFlow mf = n.getMaximumFlow(graph, 0, 5);
-		System.out.println(mf.getFlow());
-		System.out.println(mf.getEdges().toString());
-		
-		graph = new Graph(5);
-		graph.setDirectedEdge(0, 1, 3);
-		graph.setDirectedEdge(0, 2, 3);
-		graph.setDirectedEdge(2, 3, 3);
-		graph.setDirectedEdge(1, 3, 3);
-		graph.setDirectedEdge(3, 4, 4);
-		
-		mf = n.getMaximumFlow(graph, 0, 4);
-		System.out.println(mf.getFlow());
-		System.out.println(mf.getEdges().toString());		
+		return graph;
 	}
 	
-	@Test
-	public void test2()
+	public Graph getGraph1()
 	{
-		Graph graph = new Graph(6);
+		Graph graph = new Graph(4);
+		int s = 0, t = 3;
 		
-		graph.setUndirectedEdge(0, 1, 1);
-		graph.setUndirectedEdge(0, 2, 2);
-		graph.setUndirectedEdge(1, 3, 2);
-		graph.setUndirectedEdge(1, 4, 2);
-		graph.setUndirectedEdge(2, 3, 2);
-		graph.setUndirectedEdge(3, 5, 1);
-		graph.setUndirectedEdge(4, 5, 2);
+		graph.setDirectedEdge(2, t, 1);
+		graph.setDirectedEdge(1, t, 1);
+		graph.setDirectedEdge(1, 2, 1);
+		graph.setDirectedEdge(s, 2, 1);
+		graph.setDirectedEdge(s, 1, 1);
 		
-		FordFulkerson n = new FordFulkerson();
-		MaxFlow mf = n.getMaximumFlow(graph, 0, 5);
-		System.out.println(mf.getFlow());
-		System.out.println(mf.getEdges().toString());
-	}
-	
-	@Test
-	public void test3()
-	{
-		Graph graph = new Graph(9);
-		
-		graph.setUndirectedEdge(1, 2, 12);
-		graph.setUndirectedEdge(1, 3, 5);
-		graph.setUndirectedEdge(1, 4, 8);
-		graph.setUndirectedEdge(2, 4, 9);
-		graph.setUndirectedEdge(2, 5, 3);
-		graph.setUndirectedEdge(2, 6, 9);
-		graph.setUndirectedEdge(3, 6, 18);
-		graph.setUndirectedEdge(4, 5, 4);
-		graph.setUndirectedEdge(4, 7, 47);
-		graph.setUndirectedEdge(5, 8, 13);
-		graph.setUndirectedEdge(6, 8, 26);
-		graph.setUndirectedEdge(7, 8, 34);
-		
-		FordFulkerson n = new FordFulkerson();
-		MaxFlow mf = n.getMaximumFlow(graph, 1, 8);
-		System.out.println(mf.getFlow());
-		System.out.println(mf.getEdges().toString());
+		return graph;
 	}
 }

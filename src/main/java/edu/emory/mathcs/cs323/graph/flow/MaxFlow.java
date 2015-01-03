@@ -28,8 +28,8 @@ import edu.emory.mathcs.cs323.graph.Graph;
  */
 public class MaxFlow
 {
-	private Map<Edge,Double> m_residuals;
-	private double d_flow;
+	private Map<Edge,Double> m_flows;
+	private double d_maxFlow;
 	
 	public MaxFlow(Graph graph)
 	{
@@ -38,47 +38,49 @@ public class MaxFlow
 	
 	public void init(Graph graph)
 	{	
-		m_residuals = new HashMap<>();
-		d_flow = 0;
+		m_flows = new HashMap<>();
+		d_maxFlow = 0;
 		
 		for (Edge edge : graph.getAllEdges())
-			m_residuals.put(edge, 0d);
+			m_flows.put(edge, 0d);
 	}
 
 	public void updateResidual(List<Edge> path, double flow)
 	{
 		for (Edge edge : path) updateResidual(edge, flow);
-		d_flow += flow;
+		d_maxFlow += flow;
 	}
 	
 	public void updateResidual(Edge edge, double flow)
 	{
-		m_residuals.put(edge, m_residuals.get(edge)+flow);
+		Double prev = m_flows.get(edge);
+		if (prev == null) prev = 0d;
+		m_flows.put(edge, prev + flow);
 	}
 	
 	public double getResidual(Edge edge)
 	{
-		return edge.getWeight() - m_residuals.get(edge);
+		return edge.getWeight() - m_flows.get(edge);
 	}
 	
-	public double getFlow()
+	public double getMaxFlow()
 	{
-		return d_flow;
+		return d_maxFlow;
 	}
 	
-	public List<Edge> getEdges()
+	public List<Edge> getFlowEdges()
 	{
 		List<Edge> edges = new ArrayList<>();
 		double r;
 		Edge e;
 		
-		for (Edge edge : m_residuals.keySet())
+		for (Edge edge : m_flows.keySet())
 		{
-			r = m_residuals.get(edge);
+			r = m_flows.get(edge);
+			
 			if (r > 0)
 			{
-				e = new Edge(edge);
-				e.setWeight(r);
+				e = new Edge(edge.getSource(), edge.getTarget(), r);
 				edges.add(e);
 			}
 		}
