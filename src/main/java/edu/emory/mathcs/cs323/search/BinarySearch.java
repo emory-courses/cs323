@@ -37,12 +37,15 @@ public class BinarySearch<T extends Comparable<T>> implements ISearch<T>
 	 */
 	protected int search(List<T> list, T key, int beginIndex, int endIndex)
 	{
+		//Element found
 		if (beginIndex == endIndex)
 			return key.equals(list.get(beginIndex)) ? beginIndex : -1;
 		
+		//Element not found
 		if (beginIndex > endIndex)
 			return -1;
 		
+		//Recursivly binary search the remaining sublist
 		int middleIndex = MathUtils.getMiddleIndex(beginIndex, endIndex);
 		int diff = key.compareTo(list.get(middleIndex));
 
