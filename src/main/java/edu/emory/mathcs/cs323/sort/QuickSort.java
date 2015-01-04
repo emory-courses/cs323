@@ -25,8 +25,12 @@ public class QuickSort<T extends Comparable<T>> extends AbstractSort<T>
 	{
 		if (beginIndex + 1 < endIndex)	// more than one key in the range
 		{
+			//Sort current partition
 			int pivotIndex = partition(array, beginIndex, endIndex);
+			
+			//Sort left partition
 			sort(array, beginIndex, pivotIndex);
+			//Sort right partition
 			sort(array, pivotIndex+1, endIndex);
 		}
 	}
@@ -37,8 +41,8 @@ public class QuickSort<T extends Comparable<T>> extends AbstractSort<T>
 		
 		while (true)
 		{
-			while (++fst < endIndex   && compareTo(array, beginIndex, fst) >= 0);	// fst > pivot
-			while (--snd > beginIndex && compareTo(array, beginIndex, snd) <= 0);	// snd < pivot
+			while (++fst < endIndex   && compareTo(array, beginIndex, fst) >= 0);	// Find where endIndex > fst > pivot 
+			while (--snd > beginIndex && compareTo(array, beginIndex, snd) <= 0);	// Find where beginIndex < snd < pivot
 			if (fst >= snd) break;
 			swap(array, fst, snd);
 		}

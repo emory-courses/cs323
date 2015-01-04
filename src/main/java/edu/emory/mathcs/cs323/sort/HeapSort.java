@@ -26,9 +26,11 @@ public class HeapSort<T extends Comparable<T>> extends AbstractSort<T>
 	@Override
 	public void sort(T[] array, int beginIndex, int endIndex)
 	{
+		//Heapigy all elements
 		for (int k=getParentIndex(beginIndex, endIndex); k>=beginIndex; k--)
 			sink(array, k, beginIndex, endIndex);
 		
+		//Swap the endIndex element with the root element and sink it
 		while (endIndex > beginIndex+1)
 		{
 			swap(array, beginIndex, --endIndex);

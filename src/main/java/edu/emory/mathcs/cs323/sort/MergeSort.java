@@ -30,8 +30,12 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSort<T>
 	{
 		if (beginIndex + 1 >= endIndex) return;
 		int middleIndex = beginIndex + (endIndex - beginIndex) / 2;
+
+		//Sort left partition
 		sort (array, beginIndex, middleIndex);
+		//Sort Right partition
 		sort (array, middleIndex, endIndex);
+		//Merge partitions
 		merge(array, beginIndex, middleIndex, endIndex);
 	}
 	

@@ -27,6 +27,7 @@ public class ShellSort<T extends Comparable<T>> extends InsertionSort<T>
 		
 		while (h >= 1)
 		{
+			//Insetion sort with the gap of h
 			sort(array, beginIndex, endIndex, h);
 			h = getNextH(h);
 		}
@@ -34,12 +35,12 @@ public class ShellSort<T extends Comparable<T>> extends InsertionSort<T>
 	
 	public int getMaxH(int n)
 	{
-		final int upper = n / 3;
+		final int upper = n / 3;	//Esitmate the upper bound of the sequence
 		int h = 1, t;
 		
 		while (true)
 		{
-			t = 3*h + 1;
+			t = 3*h + 1;			//Find the next number in the sequence
 			if (t > upper) break;
 			h = t;
 		}

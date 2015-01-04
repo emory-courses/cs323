@@ -42,11 +42,14 @@ public abstract class AbstractBucketSort<T extends Comparable<T>> extends Abstra
 	@Override
 	public void sort(T[] array, int beginIndex, int endIndex)
 	{
+		//Add each element to its corresponding bucket
 		for (int i=beginIndex; i<endIndex; i++)
 			g_buckets[getBucketIndex(array[i])].add(array[i]);
 		
+		//Spit out all bucket elements and reassign array elements
 		for (List<T> bucket : g_buckets)
 		{
+			//Sort each bucket if b_sort == true
 			if (b_sort)
 				Collections.sort(bucket);
 			

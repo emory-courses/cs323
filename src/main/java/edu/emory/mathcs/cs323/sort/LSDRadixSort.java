@@ -26,13 +26,14 @@ public class LSDRadixSort extends AbstractBucketSort<Integer>
 	
 	public LSDRadixSort(int maxDigits)
 	{
-		super(10, false);
+		super(10, true);
 		MAX = maxDigits;
 	}
 	
 	@Override
 	public void sort(Integer[] array, int beginIndex, int endIndex)
 	{
+		//Sort each LSD
 		for (int i=0; i<MAX; i++)
 		{
 			i_div = (int)Math.pow(10, i);
