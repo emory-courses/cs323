@@ -31,19 +31,48 @@ public class AVLTree<T extends Comparable<T>> extends AbstractBalancedBinarySear
 	protected void rotateLeft(AVLNode<T> node)
 	{
 		super.rotateLeft(node);
-		node.resetHeights();
+		node.resetHeights();		//Reset Height after rotation
 	}
 	
 	@Override
 	protected void rotateRight(AVLNode<T> node)
 	{
 		super.rotateRight(node);
-		node.resetHeights();
+		node.resetHeights();		//Reset Height after rotation
 	}
 	
 	@Override
 	protected void balance(AVLNode<T> node)
 	{
+		/* Roration cases (N = node, C = child)
+		 * Case 1:
+		 * 			N
+		 * 		  /
+		 * 		C
+		 * 	  /
+		 *  O
+		 * 
+		 * Case 2:
+		 * 		N
+		 * 	  /
+		 * 	C
+		 *    \
+		 *  	O
+		 *  
+		 * Case 3:
+		 *  N
+		 *    \
+		 *    	C
+		 *    	  \
+		 *     		O
+		 * Case 4:
+		 *  N
+		 *    \
+		 *    	C
+		 *    /
+		 *  O
+		 */	
+		
 		if (node == null) return;
 		int bf = node.getBalanceFactor();
 		
@@ -51,21 +80,21 @@ public class AVLTree<T extends Comparable<T>> extends AbstractBalancedBinarySear
 		{
 			AVLNode<T> child = node.getLeftChild();
 			
-			if (child.getBalanceFactor() == -1)
+			if (child.getBalanceFactor() == -1) 	//Case 2
 				rotateLeft(child);
 			
-			rotateRight(node);
+			rotateRight(node);		//Case 1
 		}
 		else if (bf == -2)
 		{
 			AVLNode<T> child = node.getRightChild();
 			
-			if (child.getBalanceFactor() == 1)
+			if (child.getBalanceFactor() == 1)		//Case 4
 				rotateRight(child);
 			
-			rotateLeft(node);
+			rotateLeft(node);		//Case 3
 		}
 		else
-			balance(node.getParent());
+			balance(node.getParent());		//Recurrsively balance parent
 	}
 }

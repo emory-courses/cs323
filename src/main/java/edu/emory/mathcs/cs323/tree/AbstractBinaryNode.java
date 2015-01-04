@@ -30,6 +30,7 @@ public abstract class AbstractBinaryNode<T extends Comparable<T>,N extends Abstr
 		setKey(key);
 	}
 	
+//	============================== Getters ==============================
 	public T getKey()
 	{
 		return t_key;
@@ -54,7 +55,25 @@ public abstract class AbstractBinaryNode<T extends Comparable<T>,N extends Abstr
 	{
 		return hasParent() ? n_parent.getParent() : null;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public N getSibling()
+	{
+		if (hasParent())
+		{
+			N parent = getParent();
+			return parent.isLeftChild((N)this) ? parent.getRightChild() : parent.getLeftChild();
+		}
+		
+		return null;
+	}
+	
+	public N getUncle()
+	{
+		return hasParent() ? n_parent.getSibling() : null;
+	}
 
+//	============================== Setters ==============================
 	public void setKey(T key)
 	{
 		t_key = key;
@@ -65,6 +84,36 @@ public abstract class AbstractBinaryNode<T extends Comparable<T>,N extends Abstr
 		n_parent = node;
 	}
 	
+	public void setLeftChild(N node)
+	{
+		replaceParent(node);
+		n_leftChild = node;
+	}
+	
+	public void setRightChild(N node)
+	{
+		replaceParent(node);
+		n_rightChild = node;
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected void replaceParent(N node)
+	{
+		if (node != null)
+		{
+			if (node.hasParent()) node.getParent().replaceChild(node, null);
+			node.setParent((N)this);
+		}
+	}
+	
+	/** Replaces the old child with the new child if exists. */
+	public void replaceChild(N oldChild, N newChild)
+	{
+		if      (isLeftChild (oldChild)) 	setLeftChild (newChild);
+		else if (isRightChild(oldChild))	setRightChild(newChild);
+	}
+
+//	============================== Checks ==============================
 	public boolean hasParent()
 	{
 		return n_parent != null;
@@ -96,53 +145,8 @@ public abstract class AbstractBinaryNode<T extends Comparable<T>,N extends Abstr
 	{
 		return n_rightChild == node;
 	}
-	
-	@SuppressWarnings("unchecked")
-	public N getSibling()
-	{
-		if (hasParent())
-		{
-			N parent = getParent();
-			return parent.isLeftChild((N)this) ? parent.getRightChild() : parent.getLeftChild();
-		}
-		
-		return null;
-	}
-	
-	public N getUncle()
-	{
-		return hasParent() ? n_parent.getSibling() : null;
-	}
-	
-	public void setLeftChild(N node)
-	{
-		replaceParent(node);
-		n_leftChild = node;
-	}
-	
-	public void setRightChild(N node)
-	{
-		replaceParent(node);
-		n_rightChild = node;
-	}
-	
-	@SuppressWarnings("unchecked")
-	protected void replaceParent(N node)
-	{
-		if (node != null)
-		{
-			if (node.hasParent()) node.getParent().replaceChild(node, null);
-			node.setParent((N)this);
-		}
-	}
-	
-	/** Replaces the old child with the new child if exists. */
-	public void replaceChild(N oldChild, N newChild)
-	{
-		if      (isLeftChild (oldChild)) 	setLeftChild (newChild);
-		else if (isRightChild(oldChild))	setRightChild(newChild);
-	}
-	
+
+//	=================================================================
 	@Override
 	public String toString()
 	{

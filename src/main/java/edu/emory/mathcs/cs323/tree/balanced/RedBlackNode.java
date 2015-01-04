@@ -31,6 +31,18 @@ public class RedBlackNode<T extends Comparable<T>> extends AbstractBinaryNode<T,
 		setToRed();
 	}
 	
+//	============================== Setters ==============================
+	public void setToRed()
+	{
+		b_red = true;
+	}
+	
+	public void setToBlack()
+	{
+		b_red = false;
+	}
+	
+//	============================== Checks ==============================
 	public boolean isRed()
 	{
 		return b_red;
@@ -41,16 +53,7 @@ public class RedBlackNode<T extends Comparable<T>> extends AbstractBinaryNode<T,
 		return !b_red;
 	}
 	
-	public void setToRed()
-	{
-		b_red = true;
-	}
-	
-	public void setToBlack()
-	{
-		b_red = false;
-	}
-
+//	=================================================================
 	@Override
 	public String toString()
 	{

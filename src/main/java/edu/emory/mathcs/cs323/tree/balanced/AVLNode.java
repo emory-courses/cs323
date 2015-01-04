@@ -31,11 +31,13 @@ public class AVLNode<T extends Comparable<T>> extends AbstractBinaryNode<T,AVLNo
 		i_height = 1;
 	}
 	
+//	============================== Getters ==============================
 	public int getHeight()
 	{
 		return i_height;
 	}
 	
+//	============================== Setters ==============================
 	public void setHeight(int height)
 	{
 		i_height = height;
@@ -55,19 +57,6 @@ public class AVLNode<T extends Comparable<T>> extends AbstractBinaryNode<T,AVLNo
 		resetHeights();
 	}
 	
-	/** @return height(left-subtree) - height(right-subtree). */
-	public int getBalanceFactor()
-	{
-		if (hasBothChildren())
-			return n_leftChild.getHeight() - n_rightChild.getHeight();
-		else if (hasLeftChild())
-			return n_leftChild.getHeight();
-		else if (hasRightChild())
-			return -n_rightChild.getHeight();
-		else
-			return 0;
-	}
-	
 	/** Resets the heights of this node and its ancestor, recursively. */
 	public void resetHeights()
 	{
@@ -80,14 +69,32 @@ public class AVLNode<T extends Comparable<T>> extends AbstractBinaryNode<T,AVLNo
 		{
 			int lh = node.hasLeftChild()  ? node.getLeftChild() .getHeight() : 0;
 			int rh = node.hasRightChild() ? node.getRightChild().getHeight() : 0;
-			int height = (lh > rh) ? lh + 1 : rh + 1;
+			
+			//height = Max(leftChild.height, rightChild.height) + 1
+			int height = (lh > rh) ? lh + 1 : rh + 1;								
 			
 			if (height != node.getHeight())
 			{
 				node.setHeight(height);
+				
+				//Recurrsively update parent height
 				resetHeightsAux(node.getParent());
 			}
 		}
+	}
+	
+//	=================================================================
+	/** @return height(left-subtree) - height(right-subtree). */
+	public int getBalanceFactor()
+	{
+		if (hasBothChildren())
+			return n_leftChild.getHeight() - n_rightChild.getHeight();
+		else if (hasLeftChild())
+			return n_leftChild.getHeight();
+		else if (hasRightChild())
+			return -n_rightChild.getHeight();
+		else
+			return 0;
 	}
 	
 	public String toString()
