@@ -40,8 +40,12 @@ public class EagerPriorityQueue<T extends Comparable<T>> extends AbstractPriorit
 	@Override
 	public void add(T key)
 	{
+		//Binarily search the element in the list (if not found, index < 0)
 		int index = Collections.binarySearch(l_keys, key);
+		
+		//If element not found, the appropriate insert index = -(index +1)
 		if (index < 0) index = -(index + 1);
+		
 		l_keys.add(index, key);
 	}
 

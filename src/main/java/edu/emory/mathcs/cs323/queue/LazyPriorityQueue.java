@@ -47,6 +47,8 @@ public class LazyPriorityQueue<T extends Comparable<T>> extends AbstractPriority
 	public T removeMax()
 	{
 		throwNoSuchElementException();
+		
+		//Linearly search for the maximum element in the list
 		T max = Collections.max(l_keys);
 		l_keys.remove(max);
 		return max;

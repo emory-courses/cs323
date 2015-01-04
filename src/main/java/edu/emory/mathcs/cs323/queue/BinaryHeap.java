@@ -32,7 +32,7 @@ public class BinaryHeap<T extends Comparable<T>> extends AbstractPriorityQueue<T
 	public BinaryHeap()
 	{
 		l_keys = new ArrayList<>();
-		l_keys.add(null);
+		l_keys.add(null);			//Initialize root as null
 		n_size = 0;
 	}
 
