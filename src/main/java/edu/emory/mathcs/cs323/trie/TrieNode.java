@@ -40,6 +40,7 @@ public class TrieNode<T>
 		setValue(null);
 	}
 	
+//	============================== Getters ==============================
 	public TrieNode<T> getParent()
 	{
 		return n_parent;
@@ -55,6 +56,18 @@ public class TrieNode<T>
 		return t_value;
 	}
 	
+	/** @return the map whose keys and values are children's characters and nodes. */
+	public Map<Character,TrieNode<T>> getChildrenMap()
+	{
+		return m_children;
+	}
+	
+	public TrieNode<T> getChild(char key)
+	{
+		return m_children.get(key);
+	}
+	
+//	============================== Setters ==============================
 	public void setParent(TrieNode<T> node)
 	{
 		n_parent = node;
@@ -77,6 +90,20 @@ public class TrieNode<T>
 		b_endState = isEndState;
 	}
 	
+	public TrieNode<T> addChild(char key)
+	{
+		TrieNode<T> child = getChild(key);
+		
+		if (child == null)
+		{
+			child = new TrieNode<T>(this, key);
+			m_children.put(key, child);
+		}
+		
+		return child;
+	}
+	
+//	============================== Checks ==============================
 	/** @return {@code true}} if this node is an end state; otherwise, {@code false}. */
 	public boolean isEndState()
 	{
@@ -93,30 +120,7 @@ public class TrieNode<T>
 		return !m_children.isEmpty();
 	}
 	
-	/** @return the map whose keys and values are children's characters and nodes. */
-	public Map<Character,TrieNode<T>> getChildrenMap()
-	{
-		return m_children;
-	}
-	
-	public TrieNode<T> getChild(char key)
-	{
-		return m_children.get(key);
-	}
-	
-	public TrieNode<T> addChild(char key)
-	{
-		TrieNode<T> child = getChild(key);
-		
-		if (child == null)
-		{
-			child = new TrieNode<T>(this, key);
-			m_children.put(key, child);
-		}
-		
-		return child;
-	}
-	
+//	=================================================================	
 	public TrieNode<T> removeChild(char key)
 	{
 		return m_children.remove(key);
