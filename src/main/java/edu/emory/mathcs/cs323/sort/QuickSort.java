@@ -46,4 +46,14 @@ public class QuickSort<T extends Comparable<T>> extends AbstractSort<T>
 		swap(array, beginIndex, snd);
 		return snd;
 	}
+	
+	protected int getMaxDepthForIntroSort(int beginIndex, int endIndex)
+	{
+		return 2 * (int)log2(endIndex - beginIndex);
+	}
+	
+	private double log2(int i)
+	{
+		return Math.log(i) / Math.log(2);
+	}
 }

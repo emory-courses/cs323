@@ -19,8 +19,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import edu.emory.mathcs.cs323.utils.MathUtils;
-
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
@@ -29,6 +27,6 @@ public class MathUtilsTest
 	@Test
 	public void testSum()
 	{
-		assertEquals(MathUtils.sum(new int[]{1,2,3,4,5}), 15);
+		assertEquals(MathUtils.getMiddleIndex(0, 10), 5);
 	}
 }
