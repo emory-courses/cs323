@@ -18,7 +18,7 @@ package edu.emory.mathcs.cs323.sort;
 import java.util.Collections;
 import java.util.List;
 
-import edu.emory.mathcs.utils.DSUtils;
+import edu.emory.mathcs.cs323.utils.DSUtils;
 
 
 /**

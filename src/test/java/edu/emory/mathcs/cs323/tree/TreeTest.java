@@ -28,7 +28,7 @@ import org.junit.Test;
 
 import edu.emory.mathcs.cs323.tree.balanced.AVLTree;
 import edu.emory.mathcs.cs323.tree.balanced.RedBlackTree;
-import edu.emory.mathcs.utils.DSUtils;
+import edu.emory.mathcs.cs323.utils.DSUtils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})

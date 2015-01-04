@@ -24,8 +24,8 @@ import java.util.Random;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import edu.emory.mathcs.utils.DSUtils;
-import edu.emory.mathcs.utils.StringUtils;
+import edu.emory.mathcs.cs323.utils.DSUtils;
+import edu.emory.mathcs.cs323.utils.StringUtils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})

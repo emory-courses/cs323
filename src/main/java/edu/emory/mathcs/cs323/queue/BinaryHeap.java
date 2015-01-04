@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import edu.emory.mathcs.utils.DSUtils;
+import edu.emory.mathcs.cs323.utils.DSUtils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})

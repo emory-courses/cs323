@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.emory.mathcs.utils;
+package edu.emory.mathcs.cs323.utils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
@@ -30,7 +30,6 @@ public class MathUtils
 		
 		return sum;
 	}
-	
 	
 	/**
 	 * @param beginIndex inclusive.

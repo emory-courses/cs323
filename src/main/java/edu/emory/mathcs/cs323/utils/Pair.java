@@ -13,38 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.emory.mathcs.utils;
-
-import java.util.List;
+package edu.emory.mathcs.cs323.utils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class StringUtils
+public class Pair<T1,T2>
 {
-	static public String join(long[] array, String delim)
-	{
-		StringBuilder build = new StringBuilder();
-		
-		for (long item : array)
-		{
-			build.append(delim);
-			build.append(item);
-		}
-		
-		return build.substring(delim.length());
-	}
+	public T1 fst;
+	public T2 snd;
 	
-	static public <T>String join(List<T> list, String delim)
+	public Pair(T1 fst, T2 snd)
 	{
-		StringBuilder build = new StringBuilder();
-		
-		for (T item : list)
-		{
-			build.append(delim);
-			build.append(item);
-		}
-		
-		return build.length() > delim.length() ? build.substring(delim.length()) : "";
+		this.fst = fst;
+		this.snd = snd;
 	}
 }

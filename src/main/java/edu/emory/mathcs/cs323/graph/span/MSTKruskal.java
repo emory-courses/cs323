@@ -20,7 +20,7 @@ import java.util.Set;
 
 import edu.emory.mathcs.cs323.graph.Edge;
 import edu.emory.mathcs.cs323.graph.Graph;
-import edu.emory.mathcs.utils.DSUtils;
+import edu.emory.mathcs.cs323.utils.DSUtils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})

@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.Set;
 
 import edu.emory.mathcs.cs323.graph.Edge;
-import edu.emory.mathcs.utils.MathUtils;
+import edu.emory.mathcs.cs323.utils.MathUtils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})

@@ -23,9 +23,9 @@ import java.util.Random;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import edu.emory.mathcs.utils.AbstractEngineComparer;
-import edu.emory.mathcs.utils.DSUtils;
-import edu.emory.mathcs.utils.MathUtils;
+import edu.emory.mathcs.cs323.utils.AbstractEngineComparer;
+import edu.emory.mathcs.cs323.utils.DSUtils;
+import edu.emory.mathcs.cs323.utils.MathUtils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})

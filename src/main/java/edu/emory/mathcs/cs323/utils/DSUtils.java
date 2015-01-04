@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.emory.mathcs.utils;
+package edu.emory.mathcs.cs323.utils;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

@@ -21,7 +21,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
-import edu.emory.mathcs.utils.StringUtils;
+import edu.emory.mathcs.cs323.utils.StringUtils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
