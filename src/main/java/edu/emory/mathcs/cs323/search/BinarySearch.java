@@ -17,7 +17,7 @@ package edu.emory.mathcs.cs323.search;
 
 import java.util.List;
 
-import edu.emory.mathcs.utils.MathUtils;
+import edu.emory.mathcs.cs323.utils.MathUtils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})

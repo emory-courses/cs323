@@ -13,20 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.emory.mathcs.utils;
+package edu.emory.mathcs.cs323.utils;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
+import java.util.List;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class MathUtilsTest
+public class StringUtils
 {
-	@Test
-	public void testSum()
+	static public String join(long[] array, String delim)
 	{
-		assertEquals(MathUtils.sum(new int[]{1,2,3,4,5}), 15);
+		StringBuilder build = new StringBuilder();
+		
+		for (long item : array)
+		{
+			build.append(delim);
+			build.append(item);
+		}
+		
+		return build.substring(delim.length());
+	}
+	
+	static public <T>String join(List<T> list, String delim)
+	{
+		StringBuilder build = new StringBuilder();
+		
+		for (T item : list)
+		{
+			build.append(delim);
+			build.append(item);
+		}
+		
+		return build.length() > delim.length() ? build.substring(delim.length()) : "";
 	}
 }

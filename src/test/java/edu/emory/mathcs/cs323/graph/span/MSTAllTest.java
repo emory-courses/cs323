@@ -27,7 +27,7 @@ import org.junit.Test;
 import edu.emory.mathcs.cs323.assignment.hw3.MSTAllPrim;
 import edu.emory.mathcs.cs323.graph.Edge;
 import edu.emory.mathcs.cs323.graph.Graph;
-import edu.emory.mathcs.utils.StringUtils;
+import edu.emory.mathcs.cs323.utils.StringUtils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})

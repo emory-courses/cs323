@@ -24,7 +24,6 @@ import java.util.Map;
 import java.util.Set;
 
 import edu.emory.mathcs.cs323.graph.Edge;
-import edu.emory.mathcs.utils.MathUtils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
@@ -163,10 +162,9 @@ public class SpanningTree implements Comparable<SpanningTree>
 	public String toString()
 	{
 		StringBuilder build = new StringBuilder();
-		int size = MathUtils.getMaxBit(size());
 		
 		for (Edge edge : l_edges)
-			build.append(String.format("\n%"+size+"d <- %"+size+"d : %f", edge.getTarget(), edge.getSource(), edge.getWeight()));
+			build.append(String.format("\n%d <- %d : %f", edge.getTarget(), edge.getSource(), edge.getWeight()));
 		
 		return build.length() > 0 ? build.substring(1) : "";
 	}

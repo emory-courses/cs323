@@ -23,7 +23,7 @@ import org.junit.Test;
 import edu.emory.mathcs.cs323.dynamic.hanoi.AbstractHanoi;
 import edu.emory.mathcs.cs323.dynamic.hanoi.DHanoi;
 import edu.emory.mathcs.cs323.dynamic.hanoi.RHanoi;
-import edu.emory.mathcs.utils.StringUtils;
+import edu.emory.mathcs.cs323.utils.StringUtils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
