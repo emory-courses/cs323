@@ -55,33 +55,33 @@ public class RedBlackTree<T extends Comparable<T>> extends AbstractBalancedBinar
 	/** color(node) = red & color(parent) = red. */
 	private void balanceWithBlackUncle(RedBlackNode<T> node)
 	{
-		/* Roration cases (G = grandparent, P = parent, C = child)
+		/* Rotation cases (G = grandparent, P = parent, C = child)
 		 * Case 1:
-		 * 			G
-		 * 		  /
-		 * 		P
+		 *     G
 		 * 	  /
-		 *  C
+		 *   P
+		 * 	/
+		 * C
 		 * 
 		 * Case 2:
-		 * 		G
-		 * 	  /
-		 * 	P
-		 *    \
-		 *  	C
+		 *   G
+		 *  /
+		 * P
+		 *  \
+		 *   C
 		 *  
 		 * Case 3:
-		 *  G
+		 * G
+		 *  \
+		 *   P
 		 *    \
-		 *    	P
-		 *    	  \
-		 *     		C
+		 *     C
 		 * Case 4:
-		 *  G
-		 *    \
-		 *    	P
-		 *    /
-		 *  C
+		 * G
+		 *  \
+		 *   P
+		 *  /
+		 * C
 		 */	
 		
 		RedBlackNode<T> grandParent = node.getGrandParent();

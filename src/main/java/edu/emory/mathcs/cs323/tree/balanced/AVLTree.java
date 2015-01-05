@@ -44,33 +44,33 @@ public class AVLTree<T extends Comparable<T>> extends AbstractBalancedBinarySear
 	@Override
 	protected void balance(AVLNode<T> node)
 	{
-		/* Roration cases (N = node, C = child)
+		/* Rotation cases (N = node, C = child)
 		 * Case 1:
-		 * 			N
-		 * 		  /
-		 * 		C
-		 * 	  /
-		 *  O
+		 *     N
+		 *    /
+		 *   C
+		 *  /
+		 * O
 		 * 
 		 * Case 2:
-		 * 		N
-		 * 	  /
-		 * 	C
-		 *    \
-		 *  	O
+		 *   N
+		 *  /
+		 * C
+		 *  \
+		 *   O
 		 *  
 		 * Case 3:
-		 *  N
+		 * N
+		 *  \
+		 *   C
 		 *    \
-		 *    	C
-		 *    	  \
-		 *     		O
+		 *     O
 		 * Case 4:
-		 *  N
-		 *    \
-		 *    	C
-		 *    /
-		 *  O
+		 * N
+		 *  \
+		 *   C
+		 *  /
+		 * O
 		 */	
 		
 		if (node == null) return;
