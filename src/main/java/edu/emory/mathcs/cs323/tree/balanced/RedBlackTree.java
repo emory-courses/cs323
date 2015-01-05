@@ -58,9 +58,9 @@ public class RedBlackTree<T extends Comparable<T>> extends AbstractBalancedBinar
 		/* Rotation cases (G = grandparent, P = parent, C = child)
 		 * Case 1:
 		 *     G
-		 * 	  /
+		 *    /
 		 *   P
-		 * 	/
+		 *  /
 		 * C
 		 * 
 		 * Case 2:
