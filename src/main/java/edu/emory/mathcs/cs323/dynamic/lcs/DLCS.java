@@ -32,14 +32,25 @@ public class DLCS extends AbstractLCS
 		if (i < 0 || j < 0)
 			return "";
 		
-		if (c[i] == d[j])
+		//Found common sequence
+		if (c[i] == d[j]) 
 			return solve(c, d, i-1, j-1, table) + c[i];
 		
+		//If search on String c has exhausted
 		if (i == 0)	return solve(c, d, i, j-1, table);
+		//If search on String d has exhausted 
 		if (j == 0)	return solve(c, d, i-1, j, table);
+		
+		//Recursively search for the table[i][j] with the largest element
 		return (table[i-1][j] > table[i][j-1]) ? solve(c, d, i-1, j, table) : solve(c, d, i, j-1, table);
 	}
 	
+	/**
+	 * Populating lcs dynamic table of the (sub)strings c and d 
+	 * @param c String 1
+	 * @param d String 2
+	 * @return dynamic table populated by finding the lcs of c[0~i] and d[0~j]
+	 */
 	private int[][] createTable(char[] c, char[] d)
 	{
 		final int N = c.length, M = d.length;
