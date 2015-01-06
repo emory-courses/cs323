@@ -37,6 +37,7 @@ public class Graph
 		e_incoming = (List<Edge>[])DSUtils.createEmptyListArray(size);
 	}
 	
+//	============================== Getter ==============================
 	public List<Edge> getIncomingEdges(int target)
 	{
 		return e_incoming[target];
@@ -52,6 +53,40 @@ public class Graph
 		return edges;
 	}
 	
+	public int size()
+	{
+		return e_incoming.length;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Deque<Edge>[] getOutgoingEdges()
+	{
+		Deque<Edge>[] edges = (Deque<Edge>[])DSUtils.createEmptyDequeArray(size());
+		
+		for (int target=0; target<size(); target++)
+		{
+			for (Edge edge : getIncomingEdges(target))
+				edges[edge.getSource()].add(edge);
+		}
+		
+		return edges;
+	}
+	
+	public Deque<Integer> getVerticesWithNoIncomingEdges()
+	{
+		Deque<Integer> deque = new ArrayDeque<>();
+		int i, size = size();
+		
+		for (i=0; i<size; i++)
+		{
+			if (getIncomingEdges(i).isEmpty())
+				deque.add(i);
+		}
+		
+		return deque;
+	}
+
+//	============================== Setter ==============================
 	public Edge setDirectedEdge(int source, int target, double weight)
 	{
 		List<Edge> edges = getIncomingEdges(target);
@@ -66,11 +101,7 @@ public class Graph
 		setDirectedEdge(target, source, weight);
 	}
 	
-	public int size()
-	{
-		return e_incoming.length;
-	}
-	
+//	============================== Checks ==============================
 	public boolean containsCycle()
 	{
 		Deque<Integer> notVisited = new ArrayDeque<>();
@@ -102,34 +133,6 @@ public class Graph
 		return false;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public Deque<Edge>[] getOutgoingEdges()
-	{
-		Deque<Edge>[] edges = (Deque<Edge>[])DSUtils.createEmptyDequeArray(size());
-		
-		for (int target=0; target<size(); target++)
-		{
-			for (Edge edge : getIncomingEdges(target))
-				edges[edge.getSource()].add(edge);
-		}
-		
-		return edges;
-	}
-	
-	public Deque<Integer> getVerticesWithNoIncomingEdges()
-	{
-		Deque<Integer> deque = new ArrayDeque<>();
-		int i, size = size();
-		
-		for (i=0; i<size; i++)
-		{
-			if (getIncomingEdges(i).isEmpty())
-				deque.add(i);
-		}
-		
-		return deque;
-	}
-	
 	public boolean isEmpty()
 	{
 		for (int i=0; i<size(); i++)
@@ -141,6 +144,7 @@ public class Graph
 		return true;
 	}
 	
+//	===================================================================
 	public String toString()
 	{
 		StringBuilder build = new StringBuilder();
