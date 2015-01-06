@@ -45,19 +45,7 @@ public class MaxFlow
 			m_flows.put(edge, 0d);
 	}
 
-	public void updateResidual(List<Edge> path, double flow)
-	{
-		for (Edge edge : path) updateResidual(edge, flow);
-		d_maxFlow += flow;
-	}
-	
-	public void updateResidual(Edge edge, double flow)
-	{
-		Double prev = m_flows.get(edge);
-		if (prev == null) prev = 0d;
-		m_flows.put(edge, prev + flow);
-	}
-	
+//	============================== Getter ==============================
 	public double getResidual(Edge edge)
 	{
 		return edge.getWeight() - m_flows.get(edge);
@@ -86,5 +74,19 @@ public class MaxFlow
 		}
 		
 		return edges;
+	}
+	
+//	============================== Setter ==============================
+	public void updateResidual(List<Edge> path, double flow)
+	{
+		for (Edge edge : path) updateResidual(edge, flow);
+		d_maxFlow += flow;
+	}
+	
+	public void updateResidual(Edge edge, double flow)
+	{
+		Double prev = m_flows.get(edge);
+		if (prev == null) prev = 0d;
+		m_flows.put(edge, prev + flow);
 	}
 }
