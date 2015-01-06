@@ -44,11 +44,7 @@ public class SpanningTree implements Comparable<SpanningTree>
 		d_weight = tree.getTotalWeight();
 	}
 	
-	public int size()
-	{
-		return l_edges.size();
-	}
-	
+//	============================== Getter ==============================	
 	public double getTotalWeight()
 	{
 		return d_weight;
@@ -59,10 +55,9 @@ public class SpanningTree implements Comparable<SpanningTree>
 		return l_edges;
 	}
 	
-	public void addEdge(Edge edge)
+	public int size()
 	{
-		l_edges.add(edge);
-		d_weight += edge.getWeight();
+		return l_edges.size();
 	}
 	
 	public Set<Integer> getTargets()
@@ -142,44 +137,6 @@ public class SpanningTree implements Comparable<SpanningTree>
 		}
 	}
 	
-	private void removeAll(Map<Integer,List<Edge>> map, Set<Integer> set, List<Edge> cycle)
-	{
-		List<Edge> tmp;
-		
-		for (int source : set)
-		{
-			tmp = map.get(source);
-
-			if (tmp != null)
-			{
-				tmp.removeAll(cycle);
-				if (tmp.isEmpty()) map.remove(source);
-			}
-		}
-	}
-	
-	@Override
-	public String toString()
-	{
-		StringBuilder build = new StringBuilder();
-		
-		for (Edge edge : l_edges)
-			build.append(String.format("\n%d <- %d : %f", edge.getTarget(), edge.getSource(), edge.getWeight()));
-		
-		return build.length() > 0 ? build.substring(1) : "";
-	}
-
-	@Override
-	public int compareTo(SpanningTree tree)
-	{
-		double diff = d_weight - tree.d_weight;
-		if      (diff > 0)	return 1;
-		else if (diff < 0)	return -1;
-		else 				return 0;
-	}
-	
-	
-	
 	public String getUndirectedSequence()
 	{
 		int i, size = size(), min, max;
@@ -206,5 +163,50 @@ public class SpanningTree implements Comparable<SpanningTree>
 		
 		Arrays.sort(array);
 		return Arrays.toString(array);
+	}
+	
+//	============================== Setter ==============================
+	
+	public void addEdge(Edge edge)
+	{
+		l_edges.add(edge);
+		d_weight += edge.getWeight();
+	}	
+	
+	private void removeAll(Map<Integer,List<Edge>> map, Set<Integer> set, List<Edge> cycle)
+	{
+		List<Edge> tmp;
+		
+		for (int source : set)
+		{
+			tmp = map.get(source);
+
+			if (tmp != null)
+			{
+				tmp.removeAll(cycle);
+				if (tmp.isEmpty()) map.remove(source);
+			}
+		}
+	}
+	
+//	===================================================================
+	@Override
+	public String toString()
+	{
+		StringBuilder build = new StringBuilder();
+		
+		for (Edge edge : l_edges)
+			build.append(String.format("\n%d <- %d : %f", edge.getTarget(), edge.getSource(), edge.getWeight()));
+		
+		return build.length() > 0 ? build.substring(1) : "";
+	}
+
+	@Override
+	public int compareTo(SpanningTree tree)
+	{
+		double diff = d_weight - tree.d_weight;
+		if      (diff > 0)	return 1;
+		else if (diff < 0)	return -1;
+		else 				return 0;
 	}
 }
