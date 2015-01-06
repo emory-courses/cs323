@@ -166,7 +166,6 @@ public class SpanningTree implements Comparable<SpanningTree>
 	}
 	
 //	============================== Setter ==============================
-	
 	public void addEdge(Edge edge)
 	{
 		l_edges.add(edge);

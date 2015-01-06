@@ -42,10 +42,15 @@ public class MSTEdmonds implements MSTAlgorithm
 			cycles = tree.getCycles();
 			if (cycles.isEmpty())
 			{
+				//Add all corresponding found cyclic edges to spanning tree
 				addEdgesFromCycles(tree, cyclicEdges);
 				break;
 			}
+			
+			//Update and merge forest
 			forest = updateEdgeWeights(graph, cycles);
+			
+			//Update all cyclic edges
 			addAll(cyclicEdges, cycles);
 		}
 		
@@ -67,6 +72,7 @@ public class MSTEdmonds implements MSTAlgorithm
 		return forest;
 	}
 	
+//	============================== Getter ==============================
 	private SpanningTree getMinimumIncomingEdges(Graph graph, List<Set<Integer>> forest)
 	{
 		SpanningTree tree = new SpanningTree();
@@ -91,6 +97,33 @@ public class MSTEdmonds implements MSTAlgorithm
 		return tree;
 	}
 	
+	private double getChainedWeight(List<Edge> cycle, int source)
+	{
+		double sum = 0;
+		
+		for (Edge edge : cycle)
+		{
+			if (edge.getTarget() != source)
+				sum += edge.getWeight();
+		}
+		
+		return sum;
+	}
+	
+	private Set<Integer> getVertices(List<Edge> edges)
+	{
+		Set<Integer> set = new HashSet<>();
+		
+		for (Edge edge : edges)
+		{
+			set.add(edge.getSource());
+			set.add(edge.getTarget());
+		}
+		
+		return set;
+	}
+
+//	============================== Setter ==============================
 	private List<Set<Integer>> updateEdgeWeights(Graph graph, List<List<Edge>> cycles)
 	{
 		List<Set<Integer>> forest = new ArrayList<>();
@@ -128,19 +161,6 @@ public class MSTEdmonds implements MSTAlgorithm
 		return forest;
 	}
 	
-	private double getChainedWeight(List<Edge> cycle, int source)
-	{
-		double sum = 0;
-		
-		for (Edge edge : cycle)
-		{
-			if (edge.getTarget() != source)
-				sum += edge.getWeight();
-		}
-		
-		return sum;
-	}
-	
 	private void addEdgesFromCycles(SpanningTree tree, List<Edge> cyclicEdges)
 	{
 		Set<Integer> targets = tree.getTargets();
@@ -156,18 +176,5 @@ public class MSTEdmonds implements MSTAlgorithm
 	{
 		for (List<Edge> list : from)
 			toList.addAll(list);
-	}
-	
-	private Set<Integer> getVertices(List<Edge> edges)
-	{
-		Set<Integer> set = new HashSet<>();
-		
-		for (Edge edge : edges)
-		{
-			set.add(edge.getSource());
-			set.add(edge.getTarget());
-		}
-		
-		return set;
 	}
 }
