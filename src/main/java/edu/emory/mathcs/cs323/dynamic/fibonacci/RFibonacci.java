@@ -25,9 +25,9 @@ public class RFibonacci extends AbstractFibonacci
 	{
 		switch (k)
 		{
-		case 0 : return 0;
-		case 1 : return 1;
-		default: return get2p(k-1) + get2p(k-2);
+			case 0 : return 0;
+			case 1 : return 1;
+			default: return get2p(k-1) + get2p(k-2);
 		}
 	}
 }

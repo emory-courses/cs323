@@ -44,10 +44,13 @@ public abstract class AStar
 			
 			for (Edge edge : graph.getIncomingEdges(u.vertex))
 			{
+				//Vertex that can be reached through current vertex
 				int v = edge.getSource();
 				
+				//If the vertex has yet been visited
 				if (!visited.contains(v))
 				{
+					//Calculated distance from target to v
 					double dist = distances[u.vertex] + edge.getWeight();
 					
 					if (dist < distances[v])
@@ -67,18 +70,22 @@ public abstract class AStar
 	{
 		for (int i=0; i<distances.length; i++)
 		{
+			//Set distance from target to target as the heuristic value
 			if (i == target)
 				distances[i] = heuristic(i, target);
 			else
 			{
+				//Initialize all distance to infinity
 				distances[i] = Double.MAX_VALUE;
+				//Initialize all previous vertices to null
 				previous[i]  = null;
 			}
 		}
 	}
 	
 	protected abstract double heuristic(int source, int target);
-	
+
+//	========================= VertexDistancePair(VDP) Declaration =========================
 	private class VertexDistancePair implements Comparable<VertexDistancePair>
 	{
 		public int    vertex;

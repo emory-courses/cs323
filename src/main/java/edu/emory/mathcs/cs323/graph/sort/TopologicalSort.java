@@ -38,6 +38,8 @@ public class TopologicalSort
 		{
 			Deque<Integer> local = new ArrayDeque<>();
 			int vertex = global.poll();
+			
+			//Add vertex to the sequence
 			order.add(vertex);
 			Deque<Edge> outgoingEdges = outgoingEdgesAll[vertex];
 			
@@ -45,14 +47,20 @@ public class TopologicalSort
 			{
 				Edge edge = outgoingEdges.poll();
 				List<Edge> incomingEdges = graph.getIncomingEdges(edge.getTarget());
+
+				//Remove edge in all incomingEdges of the target vertex 
 				incomingEdges.remove(edge);
 				
+				//If the vertex has no incoming edges, add it to the local queue awaited to be added to the global deque
 				if (incomingEdges.isEmpty())
 					local.add(edge.getTarget());
 			}
 			
+			//Transfer all vertices in local to global
 			while (!local.isEmpty())
+				//Breath-first search
 				global.addLast(local.removeFirst());
+				//Depth-first search
 //				global.addFirst(local.removeLast());
 		}
 		
