@@ -29,7 +29,7 @@ public class LinearSearch<T extends Comparable<T>> implements ISearch<T>
 		
 		for (i=0; i<size; i++)
 		{
-			if (key.equals(list.get(i)))
+			if (key.compareTo(list.get(i)) == 0)
 				return i;
 		}
 		

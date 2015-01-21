@@ -23,7 +23,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import edu.emory.mathcs.cs323.utils.DSUtils;
@@ -40,11 +39,11 @@ public class SearchTest
 		ISearch<Integer> s1 = new LinearSearch<>();
 		ISearch<Integer> s2 = new BinarySearch<>();
 		
-		assertEquals(s1.search(list, 5), 0);
+		assertEquals(s1.search(list, 1), 4);
 		assertEquals(s1.search(list, 2), 1);
 		assertEquals(s1.search(list, 3), 2);
-		assertEquals(s1.search(list, 1), 4);
 		assertEquals(s1.search(list, 4), 6);
+		assertEquals(s1.search(list, 5), 0);
 		
 		assertTrue(s1.search(list, 0) < 0);
 		assertTrue(s1.search(list, 6) < 0);
@@ -52,26 +51,26 @@ public class SearchTest
 		Collections.sort(list);
 	// 	list = [1, 1, 2, 2, 2, 3, 4, 5]
 		
-		assertEquals(s2.search(list, 5), 7);
+		assertEquals(s2.search(list, 1), 1);
 		assertEquals(s2.search(list, 2), 3);
 		assertEquals(s2.search(list, 3), 5);
-		assertEquals(s2.search(list, 1), 1);
 		assertEquals(s2.search(list, 4), 6);
+		assertEquals(s2.search(list, 5), 7);
 		
 		assertTrue(s2.search(list, 0) < 0);
 		assertTrue(s2.search(list, 6) < 0);
 	}
 	
 	@Test
-	@Ignore
+//	@Ignore
 	@SuppressWarnings("unchecked")
-	public void testSpeed()
+	public void compareSpeed()
 	{
-		testSpeed(new LinearSearch<Integer>(), new BinarySearch<Integer>());
+		compareSpeed(new LinearSearch<Integer>(), new BinarySearch<Integer>());
 	}
 	
 	@SuppressWarnings("unchecked")
-	void testSpeed(final ISearch<Integer>... engines)
+	void compareSpeed(final ISearch<Integer>... engines)
 	{
 		final int INC = 100, ITER = 1000000;
 		final Random rand = new Random(0);

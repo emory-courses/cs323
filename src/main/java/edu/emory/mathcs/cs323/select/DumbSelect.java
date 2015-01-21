@@ -27,12 +27,12 @@ public class DumbSelect<T extends Comparable<T>> extends AbstractSelect<T>
 	@Override
 	public T max(List<T> list, int k)
 	{
-		//Check if k > list.size()
+		// Check if k > list.size()
 		throwIllegalArgumentException(list, k);
 		List<T> copy = new ArrayList<>(list);
 		T max = null;
 				
-		//Linearly search for the maximum k times
+		// Linear search for the maximum k times
 		for (int i=0; i<k; i++)
 		{
 			max = Collections.max(copy);

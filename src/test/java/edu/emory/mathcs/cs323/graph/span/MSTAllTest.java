@@ -24,10 +24,10 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import edu.emory.mathcs.cs323.assignment.hw3.MSTAllPrim;
 import edu.emory.mathcs.cs323.graph.Edge;
 import edu.emory.mathcs.cs323.graph.Graph;
 import edu.emory.mathcs.cs323.utils.StringUtils;
+import edu.emory.mathcs.cs323.zzz.hw3.MSTAllPrim;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})

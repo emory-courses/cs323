@@ -35,17 +35,17 @@ public class BinarySearch<T extends Comparable<T>> implements ISearch<T>
 	 * @param beginIndex the index of the first key to be searched (inclusive).
 	 * @param endIndex the index of the last key to be searched (inclusive). 
 	 */
-	protected int search(List<T> list, T key, int beginIndex, int endIndex)
+	private int search(List<T> list, T key, int beginIndex, int endIndex)
 	{
-		//Element found
+		// Element found
 		if (beginIndex == endIndex)
 			return key.equals(list.get(beginIndex)) ? beginIndex : -1;
 		
-		//Element not found
+		// Element not found
 		if (beginIndex > endIndex)
 			return -1;
 		
-		//Recursivly binary search the remaining sublist
+		// Recursively binary search the remaining sublist
 		int middleIndex = MathUtils.getMiddleIndex(beginIndex, endIndex);
 		int diff = key.compareTo(list.get(middleIndex));
 

@@ -29,7 +29,7 @@ public class SmartSelect<T extends Comparable<T>> extends AbstractSelect<T>
 	{
 		List<T> maxK = new ArrayList<>(k);
 		
-		//Insert all 'item' to the 'maxK' list of size k
+		// Insert all 'item' to the 'maxK' list of size k
 		for (T item : list) insert(maxK, item, k);
 		
 		return maxK.get(maxK.size()-1);
@@ -37,18 +37,18 @@ public class SmartSelect<T extends Comparable<T>> extends AbstractSelect<T>
 	
 	private void insert(List<T> maxK, T item, int k)
 	{
-		//Binarily search 'item' in the 'maxK' list (if not found, index < 0)
+		// Binary search 'item' in the 'maxK' list (if not found, index < 0)
 		int index = Collections.binarySearch(maxK, item, Collections.reverseOrder());
 		
-		//If 'item' not found, the appropriate insert index = -(index +1)
+		// If 'item' not found, the appropriate insert index = -(index +1)
 		if (index < 0) index = -(index + 1);
 		
-		//If index is within the size of 'maxK', insert 'item' to 'maxK'
+		// If index is within the size of 'maxK', insert 'item' to 'maxK'
 		if (index < k)
 		{
 			maxK.add(index, item);
 			
-			//If maxK.size() exceeds k, remove the last 'item'
+			// If maxK.size() exceeds k, remove the last 'item'
 			if (maxK.size() > k) maxK.remove(maxK.size()-1);
 		}
 	}

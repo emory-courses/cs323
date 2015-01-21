@@ -22,7 +22,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import edu.emory.mathcs.cs323.utils.DSUtils;
@@ -50,15 +49,15 @@ public class SelectTest
 	}
 	
 	@Test
-	@Ignore
+//	@Ignore
 	@SuppressWarnings("unchecked")
-	public void testSpeed()
+	public void compareSpeed()
 	{
-		testSpeed(1000, new DumbSelect<Integer>(), new SmartSelect<Integer>());
+		compareSpeed(1000, new DumbSelect<Integer>(), new SmartSelect<Integer>());
 	}
 	
 	@SuppressWarnings("unchecked")
-	void testSpeed(final int SIZE, final AbstractSelect<Integer>... ss)
+	void compareSpeed(final int SIZE, final AbstractSelect<Integer>... ss)
 	{
 		final int ITER = 1000, MAX_K = 100, LENGTH = ss.length;
 		List<Integer> list = DSUtils.getRandomIntegerList(new Random(1), SIZE);
