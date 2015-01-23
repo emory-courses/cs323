@@ -42,11 +42,12 @@ public class StorageTest {
 	public void testFridge(){
 		Fridge f = new Fridge("Henry");
 		f.addFood(new Food("Apple", 3));
-		f.addFood(new Food("Apple", 2));
+		f.addFood(new Food("Apple", 1));
 		f.addFood(new Food("Tomato", 2));
 		f.addFood(new Food("Hamburger", 5));
 		f.removeFood(new Food("Tomato", 3));
 		f.removeFood(new Food("Egg", 3));
-		assertEquals(f.toString(), "This fridge belongs to Henry and has 2 types of food:\nApple - 5 left\nHamburger - 5 left\n");
+		assertEquals(f.toString(), "This fridge belongs to Henry and has 2 types of food:\nApple - 4 left\nHamburger - 5 left\n");
+		assertEquals(f.getMostValue().toString(), "Hamburger - 5 left");
 	}
 }
