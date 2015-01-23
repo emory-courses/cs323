@@ -28,8 +28,12 @@ public abstract class Storage<T>{
 	private List<T> content;
 	
 	public Storage(String o){	
-		ownerName = o;
-		content = new ArrayList<>();
+		//To be filled
+		/*
+		 * 1. Assign o to ownerName
+		 * 2. Initialize content as ArrayList
+		 *  
+		 */
 	}
 	
 	abstract public T getMostValue();
