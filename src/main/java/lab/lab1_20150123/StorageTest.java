@@ -16,6 +16,9 @@
 package lab.lab1_20150123;
 
 import static org.junit.Assert.assertEquals;
+import lab.lab1_20150123.keys.Food;
+import lab.lab1_20150123.keys.Fridge;
+import lab.lab1_20150123.keys.WordBank;
 
 import org.junit.Test;
 
