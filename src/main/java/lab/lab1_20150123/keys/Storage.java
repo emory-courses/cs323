@@ -13,21 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.emory.mathcs.cs323.graph.path;
+package lab.lab1_20150123.keys;
 
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
+ * @author 	Yu-Hsin(Henry) Chen ({@code yu-hsin.chen@emory.edu})
+ * @version	1.0
+ * @since 	Jan 22, 2015
  */
-public class Dijkstra extends AStar
-{
-	/*
-	 * Dijkstra's algorithm is a more specific A* algorithm with the heuristic of 0
-	 */
+public abstract class Storage<T>{
+	private String ownerName;
+	private List<T> content;
 	
-	@Override
-	protected double heuristic(int source, int target)
-	{
-		return 0;
+	public Storage(String o){	
+		ownerName = o;
+		content = new ArrayList<>();
 	}
+	
+	abstract public T getMostValue();
+	
+	public String getOwnerName()	{ 	return ownerName; }
+	public List<T> getContent()		{ 	return content; }
 }

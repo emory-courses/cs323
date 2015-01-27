@@ -40,13 +40,7 @@ public class Subgraph
 		s_vertices = new HashSet<>(graph.getVertices());
 	}
 	
-	public void addEdge(Edge edge)
-	{
-		l_edges.add(edge);
-		s_vertices.add(edge.getSource());
-		s_vertices.add(edge.getTarget());
-	}
-	
+//	============================== Getter ==============================
 	public List<Edge> getEdges()
 	{
 		return l_edges;
@@ -56,7 +50,16 @@ public class Subgraph
 	{
 		return s_vertices;
 	}
+
+//	============================== Setter ==============================
+	public void addEdge(Edge edge)
+	{
+		l_edges.add(edge);
+		s_vertices.add(edge.getSource());
+		s_vertices.add(edge.getTarget());
+	}
 	
+//	============================== Checks ==============================
 	public boolean contains(int vertex)
 	{
 		return s_vertices.contains(vertex);

@@ -42,7 +42,8 @@ public class Edge implements Comparable<Edge>
 		setTarget(target);
 		setWeight(weight);
 	}
-	
+
+//	============================== Getter ==============================
 	public int getSource()
 	{
 		return i_source;
@@ -58,6 +59,7 @@ public class Edge implements Comparable<Edge>
 		return d_weight;
 	}
 	
+//	============================== Setter ==============================
 	public void setSource(int vertex)
 	{
 		i_source = vertex;
@@ -78,6 +80,7 @@ public class Edge implements Comparable<Edge>
 		d_weight += weight;
 	}
 
+//	===================================================================
 	@Override
 	public int compareTo(Edge edge)
 	{

@@ -35,6 +35,7 @@ public class MSTPrim implements MSTAlgorithm
 		Set<Integer> visited = new HashSet<>();
 		Edge edge;
 		
+		//Add all connecting vertices from start vertex to the queue
 		add(queue, visited, graph, 0);
 		
 		while (!queue.isEmpty())
@@ -44,7 +45,11 @@ public class MSTPrim implements MSTAlgorithm
 			if (!visited.contains(edge.getSource()))
 			{
 				tree.addEdge(edge);
+				
+				//If a spanning tree is found, break.
 				if (tree.size()+1 == graph.size()) break;
+				
+				//Add all connecting vertices from current vertex to the queue
 				add(queue, visited, graph, edge.getSource());
 			}
 		}
@@ -52,6 +57,12 @@ public class MSTPrim implements MSTAlgorithm
 		return tree;
 	}
 	
+	/**
+	 * @param queue Queue of all vertices awaited to explore
+	 * @param visited Set of visited vertices
+	 * @param graph Graph
+	 * @param target Target vertex
+	 */
 	private void add(PriorityQueue<Edge> queue, Set<Integer> visited, Graph graph, int target)
 	{
 		visited.add(target);

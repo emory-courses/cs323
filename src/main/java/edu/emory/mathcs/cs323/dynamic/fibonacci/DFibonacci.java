@@ -36,12 +36,19 @@ public class DFibonacci extends AbstractFibonacci
 		return table[k];
 	}
 
+	/**
+	 * @param k size of dynamic table
+	 * @return dynamic table
+	 */
 	private int[] createTable(int k)
 	{
 		int[] table = new int[k+1];
 		table[0] = 0;
 		table[1] = 1;
+		
+		//Fill table[2~k] with -1 
 		Arrays.fill(table, 2, k+1, -1);
+		
 		return table;
 	}
 }

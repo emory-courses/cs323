@@ -30,9 +30,11 @@ public abstract class AbstractFibonacci
 
 		switch (k)
 		{
-		case 0 : return 0;
-		case 1 : return 1;
-		default: return get2p(k);
+			//Base cases of Fibonacci sequence
+			case 0 : return 0;
+			case 1 : return 1;
+			
+			default: return get2p(k);
 		}
 	}
 	

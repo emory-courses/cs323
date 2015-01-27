@@ -38,16 +38,27 @@ public class FordFulkerson extends MFAlgorithm
 		Subgraph sub;
 		double min;
 		
+		//Continuously find a new path to push flow from source to target
 		while ((sub = getAugmentingPath(graph, mf, new Subgraph(), source, target)) != null)
 		{
+			//Get the edge with the minimum edge
 			min = getMin(mf, sub.getEdges());
+			
+			//Update all forward path edges with -min.getWeight()
 			mf.updateResidual(sub.getEdges(), min);
+			//Update all backward path edges with +min.getWeight()
 			updateBackward(graph, sub, mf, min);
 		}
 		
 		return mf;
 	}
 	
+	/**
+	 * @param graph Graph
+	 * @param sub that contains both forward (and backward) edges
+	 * @param mf Found MaxFlow
+	 * @param min Found weight of edge with minimum weight within the path list
+	 */
 	protected void updateBackward(Graph graph, Subgraph sub, MaxFlow mf, double min)
 	{
 		boolean found;
@@ -74,6 +85,11 @@ public class FordFulkerson extends MFAlgorithm
 		}
 	}
 	
+	/**
+	 * @param mf Found MaxFlow
+	 * @param path Found path from source to target
+	 * @return weight of edge with minimum weight within the path list
+	 */
 	private double getMin(MaxFlow mf, List<Edge> path)
 	{
 		double min = mf.getResidual(path.get(0));
@@ -85,6 +101,14 @@ public class FordFulkerson extends MFAlgorithm
 		return min;
 	}
 	
+	/**
+	 * @param graph Graph
+	 * @param mf MaxFlow currently found
+	 * @param sub Subgraph that contains both forward (and backward) edges
+	 * @param source Source vertex
+	 * @param target Target vertex
+	 * @return Augmented subgraph
+	 */
 	private Subgraph getAugmentingPath(Graph graph, MaxFlow mf, Subgraph sub, int source, int target) 
 	{
 		if (source == target) return sub;

@@ -44,8 +44,12 @@ public class MSTKruskal implements MSTAlgorithm
 			if (!visited.contains(edge.getSource()))
 			{
 				tree.addEdge(edge);
+				//If a spanning tree is found, break.
 				if (tree.size()+1 == graph.size()) break;
+				
+				//Merge forests
 				visited.addAll(forest[edge.getSource()]);
+				//Update all affected forests with merged forest
 				for (int i : visited) forest[i] = visited;
 			}
 		}
@@ -53,6 +57,10 @@ public class MSTKruskal implements MSTAlgorithm
 		return tree;
 	}
 	
+	/**
+	 * @param size Size of forest
+	 * @return forest that contain each vertex as a forest 
+	 */
 	@SuppressWarnings("unchecked")
 	private Set<Integer>[] createForest(int size)
 	{
@@ -61,6 +69,10 @@ public class MSTKruskal implements MSTAlgorithm
 		return forest;
 	}
 	
+	/**
+	 * @param graph Graph
+	 * @return PriorityQueue that contains all edges in graph sorted by their weights
+	 */
 	private PriorityQueue<Edge> createEdgePQ(Graph graph)
 	{
 		PriorityQueue<Edge> queue = new PriorityQueue<>();

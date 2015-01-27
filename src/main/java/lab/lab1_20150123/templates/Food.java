@@ -13,21 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.emory.mathcs.cs323.graph.path;
-
+package lab.lab1_20150123.templates;
 
 /**
- * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
+ * @author 	Yu-Hsin(Henry) Chen ({@code yu-hsin.chen@emory.edu})
+ * @version	1.0
+ * @since 	Jan 23, 2015
  */
-public class Dijkstra extends AStar
-{
-	/*
-	 * Dijkstra's algorithm is a more specific A* algorithm with the heuristic of 0
-	 */
+public class Food implements Comparable<Food>{
+	private String Name;
+	private int Quantity;
+	
+	public Food(String n, int q){
+		//To be filled
+	}
+	
+	public int addQuantity(int q){ 
+		//To be filled 
+	}
+
+	public String getName(){ return Name; }
+	public int getQuantity(){ return Quantity; }
 	
 	@Override
-	protected double heuristic(int source, int target)
-	{
-		return 0;
+	public int compareTo(Food o) {
+		//To be filled
+	}
+	
+	@Override
+	public String toString(){
+		//To be filled
 	}
 }
