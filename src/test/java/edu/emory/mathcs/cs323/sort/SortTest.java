@@ -65,13 +65,13 @@ public class SortTest
 	}
 	
 	@Test
-	@Ignore
+//	@Ignore
 	@SuppressWarnings("unchecked")
 	public void compareSpeeds()
 	{
 		final int ITERATIONS = 1000;
 		final int INIT_SIZE  = 100;
-		final int MAX_SIZE   = 2000;
+		final int MAX_SIZE   = 1000;
 		final int INCREMENT  = 100;
 		final int OPS        = 1;
 		final Random RAND    = new Random(0);
