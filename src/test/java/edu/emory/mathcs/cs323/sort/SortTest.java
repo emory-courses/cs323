@@ -37,14 +37,14 @@ public class SortTest
 		final int ITERATIONS = 100;
 		final int SIZE = 100;
 		
-		testAccuracy(ITERATIONS, SIZE, new SelectionSort<>());
-		testAccuracy(ITERATIONS, SIZE, new InsertionSort<>());
-		testAccuracy(ITERATIONS, SIZE, new HeapSort<>());
-		testAccuracy(ITERATIONS, SIZE, new ShellSort<>());
-		testAccuracy(ITERATIONS, SIZE, new MergeSort<>());
+//		testAccuracy(ITERATIONS, SIZE, new SelectionSort<>());
+//		testAccuracy(ITERATIONS, SIZE, new InsertionSort<>());
+//		testAccuracy(ITERATIONS, SIZE, new HeapSort<>());
+//		testAccuracy(ITERATIONS, SIZE, new ShellSort<>());
+//		testAccuracy(ITERATIONS, SIZE, new MergeSort<>());
 		testAccuracy(ITERATIONS, SIZE, new QuickSort<>());
-		testAccuracy(ITERATIONS, SIZE, new IntegerBucketSort(0, SIZE));
-		testAccuracy(ITERATIONS, SIZE, new LSDRadixSort(getMaxBit(SIZE)));
+//		testAccuracy(ITERATIONS, SIZE, new IntegerBucketSort(0, SIZE));
+//		testAccuracy(ITERATIONS, SIZE, new LSDRadixSort(getMaxBit(SIZE)));
 	}
 	
 	void testAccuracy(final int ITERATIONS, final int SIZE, AbstractSort<Integer> engine)
@@ -65,7 +65,7 @@ public class SortTest
 	}
 	
 	@Test
-//	@Ignore
+	@Ignore
 	@SuppressWarnings("unchecked")
 	public void compareSpeeds()
 	{
