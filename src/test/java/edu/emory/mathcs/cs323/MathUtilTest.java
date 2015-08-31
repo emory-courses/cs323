@@ -1,5 +1,5 @@
 /**
- * Copyright 2014, Emory University
+ * Copyright 2015, Emory University
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,26 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.emory.mathcs.cs323.search;
+package edu.emory.mathcs.cs323;
 
-import java.util.List;
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class LinearSearch<T extends Comparable<T>> implements ISearch<T>
+public class MathUtilTest
 {
-	@Override
-	public int search(List<T> list, T key)
+	@Test
+	public void test()
 	{
-		list.indexOf(key);
-		
-		for (int i=0; i<list.size(); i++)
-		{
-			if (key.compareTo(list.get(i)) == 0)
-				return i;
-		}
-		
-		return -1;
+		int a = 1,  b = 2;
+		assertEquals(2, b);
 	}
+
 }

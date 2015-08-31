@@ -49,7 +49,6 @@ public class SelectTest
 	}
 	
 	@Test
-//	@Ignore
 	@SuppressWarnings("unchecked")
 	public void compareSpeed()
 	{
@@ -59,31 +58,32 @@ public class SelectTest
 	@SuppressWarnings("unchecked")
 	void compareSpeed(final int SIZE, final AbstractSelect<Integer>... ss)
 	{
-		final int ITER = 1000, MAX_K = 100, LENGTH = ss.length;
-		List<Integer> list = DSUtils.getRandomIntegerList(new Random(1), SIZE);
+		final int WARM = 10, ITER = 1000, MAX_K = 100, LENGTH = ss.length;
 		long[][] times = new long[LENGTH][MAX_K];
+		Random rand = new Random(1);
+		List<Integer> list;
 
+		// warm-up
+		for (int i=0; i<WARM; i++)
+		{
+			list = DSUtils.getRandomIntegerList(rand, SIZE);
+					
+			for (int j=0; j<LENGTH; j++)
+				for (int k=0; k<MAX_K; k++)
+					getRuntime(ss[j], list, k+1);
+		}
+		
+		// benchmark
 		for (int i=0; i<ITER; i++)
+		{
+			list = DSUtils.getRandomIntegerList(rand, SIZE);
+					
 			for (int j=0; j<LENGTH; j++)
 				for (int k=0; k<MAX_K; k++)
 					times[j][k] += getRuntime(ss[j], list, k+1);
-
-		StringBuilder build = new StringBuilder();
-		
-		for (int k=0; k<MAX_K; k++)
-		{
-			build.append(k+1);
-			
-			for (int j=0; j<LENGTH; j++)
-			{
-				build.append("\t");
-				build.append(times[j][k]);
-			}
-			
-			build.append("\n");
 		}
-		
-		System.out.println(build.toString());
+
+		print(times);
 	}
 	
 	long getRuntime(AbstractSelect<Integer> s, List<Integer> list, int k)
@@ -95,5 +95,22 @@ public class SelectTest
 		et = System.currentTimeMillis();
 		
 		return et - st;
+	}
+	
+	void print(long[][] times)
+	{
+		StringBuilder build = new StringBuilder();
+		
+		for (int k=0; k<times[0].length; k++)
+		{
+			build.append(k+1);
+			
+			for (int j=0; j<times.length; j++)
+				build.append("\t"+times[j][k]);
+			
+			build.append("\n");
+		}
+		
+		System.out.println(build.toString());
 	}
 }

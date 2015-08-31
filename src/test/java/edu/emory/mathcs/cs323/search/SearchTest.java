@@ -48,8 +48,8 @@ public class SearchTest
 		assertTrue(s1.search(list, 0) < 0);
 		assertTrue(s1.search(list, 6) < 0);
 		
+		// list = [1, 1, 2, 2, 2, 3, 4, 5]
 		Collections.sort(list);
-	// 	list = [1, 1, 2, 2, 2, 3, 4, 5]
 		
 		assertEquals(s2.search(list, 1), 1);
 		assertEquals(s2.search(list, 2), 3);
@@ -62,7 +62,6 @@ public class SearchTest
 	}
 	
 	@Test
-//	@Ignore
 	@SuppressWarnings("unchecked")
 	public void compareSpeed()
 	{
@@ -72,7 +71,7 @@ public class SearchTest
 	@SuppressWarnings("unchecked")
 	void compareSpeed(final ISearch<Integer>... engines)
 	{
-		final int INC = 100, ITER = 1000000;
+		final int INC = 100, WARM = 10, ITER = 1000000;
 		final Random rand = new Random(0);
 		
 		StringBuilder build = new StringBuilder();
@@ -84,11 +83,13 @@ public class SearchTest
 			build.append(list.size());
 			Collections.sort(list);
 			
+			// warm-up
 			for (ISearch<Integer> engine : engines)
-			{
-				build.append("\t");
-				build.append(getRuntime(list, engine, ITER));
-			}
+				getRuntime(list, engine, WARM, i);
+			
+			// benchmark
+			for (ISearch<Integer> engine : engines)
+				build.append("\t"+getRuntime(list, engine, ITER, i));
 			
 			build.append("\n");
 		}
@@ -96,15 +97,14 @@ public class SearchTest
 		System.out.println(build.toString());
 	}
 	
-	long getRuntime(List<Integer> list, ISearch<Integer> engine, int iterations)
+	long getRuntime(List<Integer> list, ISearch<Integer> engine, int iterations, int id)
 	{
-		final Random rand = new Random(1);
+		final Random rand = new Random(id);
 		long st, et;
-		int i;
 		
 		st = System.currentTimeMillis();
 		
-		for (i=0; i<iterations; i++)
+		for (int i=0; i<iterations; i++)
 			engine.search(list, rand.nextInt());
 		
 		et = System.currentTimeMillis();

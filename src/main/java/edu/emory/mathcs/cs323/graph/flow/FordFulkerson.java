@@ -79,7 +79,7 @@ public class FordFulkerson extends MFAlgorithm
 			
 			if (!found)
 			{
-				Edge rEdge = graph.setDirectedEdge(edge.getTarget(), edge.getSource(), edge.getWeight());
+				Edge rEdge = graph.setDirectedEdge(edge.getTarget(), edge.getSource(), 0);
 				mf.updateResidual(rEdge, -min);
 			}
 		}

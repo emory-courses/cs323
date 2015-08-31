@@ -15,6 +15,7 @@
  */
 package edu.emory.mathcs.cs323.graph.match;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -29,7 +30,57 @@ public abstract class AbstractBlossom
 {
 	public List<Edge> findAugmentingPath(Graph graph, Match match)
 	{
-		return null;
+		Set<Integer> unmarkedVertices = createUnmarkedVertices(graph);
+		Set<Edge>    unmarkedEdges = createUnmarkedEdges(graph, match);
+		Set<Integer> freeVertices = getFreeVertices(graph, match);
+		Forest       forest = createForest(freeVertices);
+		Tree tv, tw;
+		Edge e, x;
+		int  v, w;
+		
+		while ((v = forest.getUnmarkedVertex(unmarkedVertices)) >= 0)
+		{
+			while ((e = getUnmarkedEdge(unmarkedEdges, v)) != null)
+			{
+				w = (e.getSource() == v) ? e.getTarget() : e.getSource();
+				
+				if (!forest.containsVertex(w))
+				{
+					x = match.getMatchedEdge(w);
+					tv = forest.getTree(v);
+					tv.addEdge(e);
+					tv.addEdge(x);
+				}
+				else
+				{
+					tv = forest.getTree(v);
+					tw = forest.getTree(w);
+					
+					if (tw.distanceToRoot(w) %2 == 0)
+					{
+						if (tv.getRoot() != tw.getRoot())
+						{
+							List<Edge> path = tv.getPathFromRoot(v);
+							path.addAll(tw.getPathToRoot(w));
+							return path;
+						}
+						else
+						{
+							List<Edge> blossom = tv.getBlossom(e, v, w);
+							Pair<Graph,Match> gm = contract(graph, match, blossom);
+							List<Edge> path = findAugmentingPath(gm.fst, gm.snd);
+							return lift(graph, gm.fst, blossom, path);
+						}
+					}
+				}
+				
+				unmarkedEdges.remove(e);
+			}
+			
+			unmarkedVertices.remove(v);
+		}
+		
+		return new ArrayList<>();
 	}
 	
 	/** @return the set of all vertices in the graph. */
