@@ -17,15 +17,15 @@ package edu.emory.mathcs.cs323.queue;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import edu.emory.mathcs.cs323.utils.DSUtils;
-import edu.emory.mathcs.cs323.utils.StringUtils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
@@ -54,40 +54,47 @@ public class PriorityQueueTest
 	}
 	
 	@Test
-	@Ignore
+//	@Ignore
 	@SuppressWarnings("unchecked")
 	public void testSpeed()
 	{
-		testSpeed(new EagerPriorityQueue<>(), new BinaryHeap<>());
+		testSpeed(new LazyPriorityQueue<>(), new EagerPriorityQueue<>(), new BinaryHeap<>());
 	}
 	
 	@SuppressWarnings("unchecked")
 	void testSpeed(AbstractPriorityQueue<Integer>... qs)
 	{
-		final int ITER = 1000, LENGTH = qs.length;
-		final Random rand = new Random(0);
+		final int ITER = 1000, WARM = 10, LENGTH = qs.length;
 		
 		StringBuilder build = new StringBuilder();
 		long[][] times = new long[LENGTH][2];
+		long[][] temp  = new long[LENGTH][2];
 		int[]    keys;
+		Random   rand;
 		
 		for (int size=100; size<=1000; size+=100)
 		{
-			for (int j=0; j<ITER; j++)
+			for (int k=0; k<LENGTH; k++)
 			{
-				keys = DSUtils.getRandomIntArray(rand, size);
+				rand = new Random(size);
 				
-				for (int k=0; k<LENGTH; k++)
+				for (int j=0; j<WARM; j++)
+				{
+					keys = DSUtils.getRandomIntArray(rand, size);
+					addRuntime(qs[k], temp[k], keys);
+				}
+				
+				for (int j=0; j<ITER; j++)
+				{
+					keys = DSUtils.getRandomIntArray(rand, size);
 					addRuntime(qs[k], times[k], keys);
+				}
 			}
 			
 			build.append(size);
 			
 			for (long[] time : times)
-			{
-				build.append("\t");
-				build.append(StringUtils.join(time, "\t"));
-			}
+				build.append("\t"+Arrays.stream(time).mapToObj(i -> Long.toString(i)).collect(Collectors.joining("\t")));
 			
 			build.append("\n");
 		}
