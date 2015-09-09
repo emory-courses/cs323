@@ -38,6 +38,7 @@ public class PriorityQueueTest
 		testAccuracy(new LazyPriorityQueue<>());
 		testAccuracy(new EagerPriorityQueue<>());
 		testAccuracy(new BinaryHeap<>());
+//		testAccuracy(new TernaryHeap<>());
 	}
 	
 	void testAccuracy(AbstractPriorityQueue<Integer> q)
@@ -50,15 +51,15 @@ public class PriorityQueueTest
 		Collections.sort(keys, Collections.reverseOrder());
 		
 		for (Integer key : keys)
-			assertEquals(q.removeMax(), key);
+			assertEquals(key, q.removeMax());
 	}
 	
 	@Test
-//	@Ignore
 	@SuppressWarnings("unchecked")
 	public void testSpeed()
 	{
 		testSpeed(new LazyPriorityQueue<>(), new EagerPriorityQueue<>(), new BinaryHeap<>());
+//		testSpeed(new BinaryHeap<>(), new TernaryHeap<>());
 	}
 	
 	@SuppressWarnings("unchecked")

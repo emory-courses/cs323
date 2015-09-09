@@ -39,11 +39,11 @@ public class SearchTest
 		ISearch<Integer> s1 = new LinearSearch<>();
 		ISearch<Integer> s2 = new BinarySearch<>();
 		
-		assertEquals(s1.search(list, 1), 4);
-		assertEquals(s1.search(list, 2), 1);
-		assertEquals(s1.search(list, 3), 2);
-		assertEquals(s1.search(list, 4), 6);
-		assertEquals(s1.search(list, 5), 0);
+		assertEquals(4, s1.search(list, 1));
+		assertEquals(1, s1.search(list, 2));
+		assertEquals(2, s1.search(list, 3));
+		assertEquals(6, s1.search(list, 4));
+		assertEquals(0, s1.search(list, 5));
 		
 		assertTrue(s1.search(list, 0) < 0);
 		assertTrue(s1.search(list, 6) < 0);
@@ -51,11 +51,11 @@ public class SearchTest
 		// list = [1, 1, 2, 2, 2, 3, 4, 5]
 		Collections.sort(list);
 		
-		assertEquals(s2.search(list, 1), 1);
-		assertEquals(s2.search(list, 2), 3);
-		assertEquals(s2.search(list, 3), 5);
-		assertEquals(s2.search(list, 4), 6);
-		assertEquals(s2.search(list, 5), 7);
+		assertEquals(1, s2.search(list, 1));
+		assertEquals(3, s2.search(list, 2));
+		assertEquals(5, s2.search(list, 3));
+		assertEquals(6, s2.search(list, 4));
+		assertEquals(7, s2.search(list, 5));
 		
 		assertTrue(s2.search(list, 0) < 0);
 		assertTrue(s2.search(list, 6) < 0);

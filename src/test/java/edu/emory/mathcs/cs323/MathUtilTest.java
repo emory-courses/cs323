@@ -16,7 +16,10 @@
 package edu.emory.mathcs.cs323;
 
 import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
+
+import edu.emory.mathcs.cs323.utils.MathUtils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
@@ -24,10 +27,8 @@ import org.junit.Test;
 public class MathUtilTest
 {
 	@Test
-	public void test()
+	public void getMiddleIndexTest()
 	{
-		int a = 1,  b = 2;
-		assertEquals(2, b);
+	    assertEquals(MathUtils.getMiddleIndex(0, 10), 5);
 	}
-
 }
