@@ -81,7 +81,7 @@ public class SortTest
 	}
 	
 	@Test
-	@Ignore
+//	@Ignore
 	@SuppressWarnings("unchecked")
 	public void countOperations()
 	{
