@@ -22,10 +22,11 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import lab.lab2_20150911.structure.AbstractLambdaMachine;
 import lab.lab2_20150911.structure.LambdaEum;
 import lab.lab2_20150911.structure.LambdaObject;
-import lab.lab2_20150911.structure.LambdaObjectMerger;
+import lab.lab2_20150911.structure.machine.AbstractLambdaMachine;
+import lab.lab2_20150911.structure.machine.LambdaObjectMerger;
+import lab.lab2_20150911.structure.machine.StringMixer;
 
 import org.junit.Test;
 
@@ -107,5 +108,13 @@ public class LambdaPractice {
 		
 		result = machine.run(new LambdaObject("A", 1, "Hello "), new LambdaObject("A", 2, "World!"));
 		System.out.println(result);
+	}
+	
+	@Test
+	public void testStringMixer(){
+		AbstractLambdaMachine<String, String, String> machine = new StringMixer();
+		
+		System.out.println(machine.run("Henry", "Chen"));
+		System.out.println(machine.run("ABCDE", "12345"));
 	}
 }

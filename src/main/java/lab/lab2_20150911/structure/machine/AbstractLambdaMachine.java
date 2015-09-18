@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lab.lab2_20150911.structure;
+package lab.lab2_20150911.structure.machine;
 
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
