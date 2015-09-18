@@ -36,10 +36,10 @@ import java.util.List;
 public class InterfacePractice<T> implements Iterable<T>, Comparable<InterfacePractice<T>>, Serializable{
 	
 	public static final String filePath = "/Users/HenryChen/Desktop/obj.out";
+	
 	public static void main(String[] args){
 		InterfacePractice<String> test1 = new InterfacePractice<>("PracticeInterface1");
-		test1.addContent("A"); test1.addContent("B"); test1.addContent("C");
-		test1.addContent("D"); test1.addContent("E"); test1.addContent("F");
+		test1.addContent("A", "B", "C", "D", "E", "F");
 		
 		InterfacePractice<String> test2 = new InterfacePractice<>("PracticeInterface2");
 		test2.addContent("G"); test2.addContent("H"); test2.addContent("I");
@@ -62,8 +62,10 @@ public class InterfacePractice<T> implements Iterable<T>, Comparable<InterfacePr
 		return interfaceName;
 	}
 	
-	public void addContent(T content){
-		interfaceContent.add(content);
+	@SuppressWarnings("unchecked")
+	public void addContent(T... contents){
+		for(T content : contents)
+			interfaceContent.add(content);
 	}
 	
 	@SuppressWarnings("unchecked")
