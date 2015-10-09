@@ -77,6 +77,8 @@ public class SortTest
 		final Random RAND    = new Random(0);
 		
 		SortSpeed comp = new SortSpeed();
+		comp.printTotal(ITERATIONS, INIT_SIZE, MAX_SIZE, INCREMENT, OPS, RAND, new MergeSort<>());
+		comp.printTotal(ITERATIONS, INIT_SIZE, MAX_SIZE, INCREMENT, OPS, RAND, new QuickSort<>(), new HeapSort<>(), new ShellSort<>(), new MergeSort<>(), new InsertionSort<>(), new SelectionSort<>());
 		comp.printTotal(ITERATIONS, INIT_SIZE, MAX_SIZE, INCREMENT, OPS, RAND, new IntegerBucketSort(0, MAX_SIZE), new LSDRadixSort(getMaxBit(MAX_SIZE)), new QuickSort<>(), new HeapSort<>(), new ShellSort<>(), new MergeSort<>(), new InsertionSort<>(), new SelectionSort<>());
 	}
 	

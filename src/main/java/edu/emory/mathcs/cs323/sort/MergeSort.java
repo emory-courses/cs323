@@ -44,10 +44,10 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSort<T>
 	 * @param middleIndex the ending index of the 1st half (exclusive).
 	 * @param endIndex the ending index of the 2nd half (exclusive).
 	 */
-	private void merge(T[] array, int beginIndex, int middleIndex, int endIndex)
+	protected void merge(T[] array, int beginIndex, int middleIndex, int endIndex)
 	{
 		int fst = beginIndex, snd = middleIndex;
-		copy(array);
+		copy(array, beginIndex, endIndex);
 		
 		for (int k=beginIndex; k<endIndex; k++)
 		{
@@ -62,14 +62,18 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSort<T>
 		}
 	}
 	
-	private void copy(T[] array)
+	private void copy(T[] array, int beginIndex, int endIndex)
 	{
-		final int N = array.length;
-		n_assignments += N;
+		int N = array.length;
 		
 		if (l_temp == null || l_temp.length < N)
 			l_temp = Arrays.copyOf(array, N);
 		else
-			System.arraycopy(array, 0, l_temp, 0, N);
+		{
+			N = endIndex - beginIndex;
+			System.arraycopy(array, beginIndex, l_temp, beginIndex, N);
+		}
+		
+		n_assignments += N;
 	}
 }
