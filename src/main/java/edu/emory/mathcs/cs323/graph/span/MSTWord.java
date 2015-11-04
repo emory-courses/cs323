@@ -95,7 +95,7 @@ public class MSTWord
 		return 0;
 	}
 	
-	public float getCosineSimilarity(float[] v1, float[] v2)
+	public float getCosineDistance(float[] v1, float[] v2)
 	{
 		// TODO:
 		return 0;
