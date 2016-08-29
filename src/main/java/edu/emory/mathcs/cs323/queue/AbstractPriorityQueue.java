@@ -38,7 +38,7 @@ public abstract class AbstractPriorityQueue<T extends Comparable<T>>
 	 * @return the key with the highest priority.
 	 * @throws NoSuchElementException if the queue is empty.
 	 */
-	abstract public T removeAux();
+	abstract protected T removeAux();
 	
 	/** @return the size of this queue. */
 	abstract public int size();
