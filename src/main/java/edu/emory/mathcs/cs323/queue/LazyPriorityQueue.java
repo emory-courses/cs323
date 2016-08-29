@@ -17,6 +17,7 @@ package edu.emory.mathcs.cs323.queue;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -24,33 +25,37 @@ import java.util.List;
  */
 public class LazyPriorityQueue<T extends Comparable<T>> extends AbstractPriorityQueue<T>
 {
-	private List<T> l_keys;
+	private List<T> keys;
 	
 	public LazyPriorityQueue()
 	{
-		l_keys = new ArrayList<>();
+		this(Comparator.naturalOrder());
+	}
+	
+	public LazyPriorityQueue(Comparator<T> comparator)
+	{
+		super(comparator);
+		keys = new ArrayList<>();
 	}
 
 	@Override
 	public int size()
 	{
-		return l_keys.size();
+		return keys.size();
 	}
 
 	@Override
 	public void add(T key)
 	{
-		l_keys.add(key);
+		keys.add(key);
 	}
 
 	@Override
-	public T removeMax()
+	public T removeAux()
 	{
-		throwNoSuchElementException();
-		
-		//Linearly search for the maximum element in the list
-		T max = Collections.max(l_keys);
-		l_keys.remove(max);
+		// linear search for the element with the highest priority
+		T max = Collections.max(keys, comparator);
+		keys.remove(max);
 		return max;
 	}
 }

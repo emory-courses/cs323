@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lab.lab1_20150123.keys;
+package edu.emory.mathcs.cs323.lab.lab1_20150123.templates;
 
 /**
  * @author 	Yu-Hsin(Henry) Chen ({@code yu-hsin.chen@emory.edu})
@@ -22,7 +22,7 @@ package lab.lab1_20150123.keys;
  */
 public class WordBank extends Storage<String>{
 
-	private String FavoriteWord;
+	String FavoriteWord;
 	
 	public WordBank(String o) {
 		super(o);
@@ -30,30 +30,36 @@ public class WordBank extends Storage<String>{
 	}
 	
 	public boolean hasWord(String w){
-		return getContent().contains(w);
+		//To be filled
+		return false;
 	}
 	
 	public void addWord(String w){
-		if(!hasWord(w)) getContent().add(w);
+		//To be filled
 	}
 	
 	public void setFavoriteWord(String w){
-		addWord(w);
-		FavoriteWord = w;
+		//To be filled
 	}
 
 	@Override
 	public String getMostValue() {
-		return FavoriteWord;
+		//To be filled (return FavoriteWord)
+		return null;
 	}
 
 	@Override
 	public String toString(){
-		String WordBankLog = getOwnerName() + "'s WordBank:\n";
-		for(String s : getContent())
-			WordBankLog += s+"\n";
-		WordBankLog += "Favorite word: " + getMostValue() + "\n";
-		return WordBankLog;
+		//To be filled
+		/*
+		 * Output:
+		 * (ownerName)'s WordBank\n
+		 * (word 1)\n
+		 * (word 2)\n
+		 * (word 3)\n
+		 * ...
+		 * Favorite word: (FavoriteWord)\n
+		 */
+		return null;
 	}
-	
 }

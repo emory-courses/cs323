@@ -17,6 +17,7 @@ package edu.emory.mathcs.cs323.queue;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -24,35 +25,40 @@ import java.util.List;
  */
 public class EagerPriorityQueue<T extends Comparable<T>> extends AbstractPriorityQueue<T>
 {
-	private List<T> l_keys;
+	private List<T> keys;
 	
 	public EagerPriorityQueue()
 	{
-		l_keys = new ArrayList<>();
+		this(Comparator.naturalOrder());
+	}
+	
+	public EagerPriorityQueue(Comparator<T> comparator)
+	{
+		super(comparator);
+		keys = new ArrayList<>();
 	}
 
 	@Override
 	public int size()
 	{
-		return l_keys.size();
+		return keys.size();
 	}
 
 	@Override
 	public void add(T key)
 	{
-		// Binary search the element in the list (if not found, index < 0)
-		int index = Collections.binarySearch(l_keys, key);
+		// binary search the element in the list (if not found, index < 0)
+		int index = Collections.binarySearch(keys, key, comparator);
 		
-		// If element not found, the appropriate insert index = -(index +1)
+		// if element not found, the appropriate insert index = -(index +1)
 		if (index < 0) index = -(index + 1);
 		
-		l_keys.add(index, key);
+		keys.add(index, key);
 	}
 
 	@Override
-	public T removeMax()
+	public T removeAux()
 	{
-		throwNoSuchElementException();
-		return l_keys.remove(l_keys.size()-1);
+		return keys.remove(keys.size()-1);
 	}
 }

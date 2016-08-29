@@ -19,6 +19,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -35,31 +36,28 @@ public class PriorityQueueTest
 	@Test
 	public void testAccuracy()
 	{
-		testAccuracy(new LazyPriorityQueue<>());
-		testAccuracy(new EagerPriorityQueue<>());
-		testAccuracy(new BinaryHeap<>());
-//		testAccuracy(new TernaryHeap<>());
+		testAccuracy(new LazyPriorityQueue<>() , Comparator.reverseOrder());
+		testAccuracy(new EagerPriorityQueue<>(), Comparator.reverseOrder());
+		testAccuracy(new BinaryHeap<>()        , Comparator.reverseOrder());
+		
+		testAccuracy(new LazyPriorityQueue<Integer>(Comparator.reverseOrder()) , Comparator.naturalOrder());
+		testAccuracy(new EagerPriorityQueue<Integer>(Comparator.reverseOrder()), Comparator.naturalOrder());
+		testAccuracy(new BinaryHeap<Integer>(Comparator.reverseOrder())        , Comparator.naturalOrder());
 	}
 	
-	void testAccuracy(AbstractPriorityQueue<Integer> q)
+	void testAccuracy(AbstractPriorityQueue<Integer> q, Comparator<Integer> sort)
 	{
 		List<Integer> keys = DSUtils.toIntegerList(4,1,3,2,5,6,8,3,4,7,5,9,7);
-		
-		for (Integer key : keys)
-			q.add(key);
-		
-		Collections.sort(keys, Collections.reverseOrder());
-		
-		for (Integer key : keys)
-			assertEquals(key, q.removeMax());
+		keys.forEach(key -> q.add(key));
+		Collections.sort(keys, sort);
+		keys.forEach(key -> assertEquals(key, q.remove()));
 	}
 	
-	@Test
+//	@Test
 	@SuppressWarnings("unchecked")
 	public void testSpeed()
 	{
 		testSpeed(new LazyPriorityQueue<>(), new EagerPriorityQueue<>(), new BinaryHeap<>());
-//		testSpeed(new BinaryHeap<>(), new TernaryHeap<>());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -118,7 +116,7 @@ public class PriorityQueueTest
 		st = System.currentTimeMillis();
 		
 		while (!queue.isEmpty())
-			queue.removeMax();
+			queue.remove();
 		
 		et = System.currentTimeMillis();
 		times[1] += et - st;

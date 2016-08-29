@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lab.lab1_20150123;
+package edu.emory.mathcs.cs323.lab.lab1_20150123;
 
 import static org.junit.Assert.assertEquals;
-import lab.lab1_20150123.keys.Food;
-import lab.lab1_20150123.keys.Fridge;
-import lab.lab1_20150123.keys.WordBank;
 
 import org.junit.Test;
+
+import edu.emory.mathcs.cs323.lab.lab1_20150123.keys.Food;
+import edu.emory.mathcs.cs323.lab.lab1_20150123.keys.Fridge;
+import edu.emory.mathcs.cs323.lab.lab1_20150123.keys.WordBank;
 
 /**
  * @author 	Yu-Hsin(Henry) Chen ({@code yu-hsin.chen@emory.edu})

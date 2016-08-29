@@ -13,52 +13,47 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lab.lab1_20150123.templates;
-
-import java.util.Collections;
+package edu.emory.mathcs.cs323.lab.lab1_20150123.keys;
 
 /**
  * @author 	Yu-Hsin(Henry) Chen ({@code yu-hsin.chen@emory.edu})
  * @version	1.0
  * @since 	Jan 23, 2015
  */
-public class Fridge extends Storage<Food>{
+public class WordBank extends Storage<String>{
 
-	private int numOfFoodType;
+	private String FavoriteWord;
 	
-	public Fridge(String o) {
+	public WordBank(String o) {
 		super(o);
-		//To be filled
+		FavoriteWord = null;
 	}
 	
-	public void addFood(Food newFood){
-		//To be filled
+	public boolean hasWord(String w){
+		return getContent().contains(w);
 	}
 	
-	public boolean removeFood(Food food){
-		//To be filled
-		return false;
+	public void addWord(String w){
+		if(!hasWord(w)) getContent().add(w);
+	}
+	
+	public void setFavoriteWord(String w){
+		addWord(w);
+		FavoriteWord = w;
 	}
 
-	public int getNumOfFoodType(){ return numOfFoodType; }
-	
 	@Override
-	public Food getMostValue() {
-		return Collections.max(getContent());
+	public String getMostValue() {
+		return FavoriteWord;
 	}
-	
+
 	@Override
 	public String toString(){
-		//To be filled
-		/*
-		 * Output:
-		 * This fridge belongs to (ownerName) and has (numOfFoodType) types of food:\n
-		 * (foodName1) - (foodQuantity1) left\n
-		 * (foodName2) - (foodQuantity2) left\n
-		 * (foodName3) - (foodQuantity3) left\n
-		 * ...
-		 */
-		return null;
+		String WordBankLog = getOwnerName() + "'s WordBank:\n";
+		for(String s : getContent())
+			WordBankLog += s+"\n";
+		WordBankLog += "Favorite word: " + getMostValue() + "\n";
+		return WordBankLog;
 	}
 	
 }

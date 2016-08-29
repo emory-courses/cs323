@@ -17,64 +17,68 @@ package edu.emory.mathcs.cs323.queue;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-
-import edu.emory.mathcs.cs323.utils.DSUtils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
 public class BinaryHeap<T extends Comparable<T>> extends AbstractPriorityQueue<T>
 {
-	private List<T> l_keys;
-	private int n_size;
+	private List<T> keys;
+	private int size;
 	
 	public BinaryHeap()
 	{
-		l_keys = new ArrayList<>();
-		l_keys.add(null);			//Initialize root as null
-		n_size = 0;
+		this(Comparator.naturalOrder());
+	}
+	
+	public BinaryHeap(Comparator<T> comparator)
+	{
+		super(comparator);
+		keys = new ArrayList<>();
+		keys.add(null);	// initialize the first item as null
+		size = 0;
 	}
 
 	@Override
 	public int size()
 	{
-		return n_size;
+		return size;
 	}
 
 	@Override
 	public void add(T key)
 	{
-		l_keys.add(key);
-		swim(++n_size);
-	}
-
-	@Override
-	public T removeMax()
-	{
-		throwNoSuchElementException();
-		Collections.swap(l_keys, 1, n_size);
-		T max = l_keys.remove(n_size--);
-		sink(1);
-		return max;
+		keys.add(key);
+		swim(++size);
 	}
 	
 	private void swim(int k)
 	{
-		while (k > 1 && DSUtils.compareTo(l_keys, k/2, k) < 0)
+		while (k > 1 && comparator.compare(keys.get(k/2), keys.get(k)) < 0)
 		{
-			Collections.swap(l_keys, k/2, k);
+			Collections.swap(keys, k/2, k);
 			k /= 2;
 		}
+	}
+
+	@Override
+	public T removeAux()
+	{
+		Collections.swap(keys, 1, size);
+		T max = keys.remove(size--);
+		sink(1);
+		return max;
 	}
 	
 	private void sink(int k)
 	{
-		for (int i=k*2; i<=n_size; k=i,i*=2)
+		for (int i=k*2; i<=size; k=i,i*=2)
 		{
-			if (i < n_size && DSUtils.compareTo(l_keys, i, i+1) < 0) i++;
-			if (DSUtils.compareTo(l_keys, k, i) >= 0) break;
-			Collections.swap(l_keys, k, i);
+			if (i < size && comparator.compare(keys.get(i), keys.get(i+1)) < 0) i++;
+			if (comparator.compare(keys.get(k), keys.get(i)) >= 0) break;
+			Collections.swap(keys, k, i);
 		}
 	}
 }

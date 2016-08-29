@@ -13,53 +13,52 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lab.lab1_20150123.templates;
+package edu.emory.mathcs.cs323.lab.lab1_20150123.templates;
+
+import java.util.Collections;
 
 /**
  * @author 	Yu-Hsin(Henry) Chen ({@code yu-hsin.chen@emory.edu})
  * @version	1.0
  * @since 	Jan 23, 2015
  */
-public class WordBank extends Storage<String>{
+public class Fridge extends Storage<Food>{
 
-	String FavoriteWord;
+	private int numOfFoodType;
 	
-	public WordBank(String o) {
+	public Fridge(String o) {
 		super(o);
-		FavoriteWord = null;
+		//To be filled
 	}
 	
-	public boolean hasWord(String w){
+	public void addFood(Food newFood){
+		//To be filled
+	}
+	
+	public boolean removeFood(Food food){
 		//To be filled
 		return false;
 	}
-	
-	public void addWord(String w){
-		//To be filled
-	}
-	
-	public void setFavoriteWord(String w){
-		//To be filled
-	}
 
+	public int getNumOfFoodType(){ return numOfFoodType; }
+	
 	@Override
-	public String getMostValue() {
-		//To be filled (return FavoriteWord)
-		return null;
+	public Food getMostValue() {
+		return Collections.max(getContent());
 	}
-
+	
 	@Override
 	public String toString(){
 		//To be filled
 		/*
 		 * Output:
-		 * (ownerName)'s WordBank\n
-		 * (word 1)\n
-		 * (word 2)\n
-		 * (word 3)\n
+		 * This fridge belongs to (ownerName) and has (numOfFoodType) types of food:\n
+		 * (foodName1) - (foodQuantity1) left\n
+		 * (foodName2) - (foodQuantity2) left\n
+		 * (foodName3) - (foodQuantity3) left\n
 		 * ...
-		 * Favorite word: (FavoriteWord)\n
 		 */
 		return null;
 	}
+	
 }

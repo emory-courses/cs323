@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lab.lab1_20150123.templates;
+package edu.emory.mathcs.cs323.lab.lab1_20150123.templates;
 
 import java.util.List;
 
