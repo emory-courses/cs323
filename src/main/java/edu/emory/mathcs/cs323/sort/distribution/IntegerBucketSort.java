@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.emory.mathcs.cs323.sort;
+package edu.emory.mathcs.cs323.sort.distribution;
 
+import java.util.Comparator;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
@@ -23,13 +24,18 @@ public class IntegerBucketSort extends AbstractBucketSort<Integer>
 {
 	private final int GAP; 
 	
+	public IntegerBucketSort(int min, int max)
+	{
+		this(min, max, Comparator.naturalOrder());
+	}
+	
 	/**
 	 * @param min the minimum integer (inclusive).
 	 * @param max the maximum integer (exclusive).
 	 */
-	public IntegerBucketSort(int min, int max)
+	public IntegerBucketSort(int min, int max, Comparator<Integer> comparator)
 	{
-		super(max - min, false);
+		super(max - min, false, comparator);
 		GAP = -min;
 	}
 	

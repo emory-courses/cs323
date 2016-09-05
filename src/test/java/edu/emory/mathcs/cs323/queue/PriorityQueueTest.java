@@ -53,7 +53,7 @@ public class PriorityQueueTest
 		keys.forEach(key -> assertEquals(key, q.remove()));
 	}
 	
-//	@Test
+	@Test
 	@SuppressWarnings("unchecked")
 	public void testSpeed()
 	{

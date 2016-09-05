@@ -13,43 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.emory.mathcs.cs323.sort;
+package edu.emory.mathcs.cs323.sort.comparison;
+
+import java.util.Comparator;
+
+import edu.emory.mathcs.cs323.sort.AbstractSort;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class ShellSort<T extends Comparable<T>> extends InsertionSort<T>
+public class SelectionSort<T extends Comparable<T>> extends AbstractSort<T>
 {
+	public SelectionSort()
+	{
+		this(Comparator.naturalOrder());
+	}
+	
+	public SelectionSort(Comparator<T> comparator)
+	{
+		super(comparator);
+	}
+	
 	@Override
-	public void sort(T[] array, int beginIndex, int endIndex)
+	public void sort(T[] array, final int beginIndex, final int endIndex)
 	{
-		int h = getMaxH(endIndex - beginIndex);
+		int min;
 		
-		while (h >= 1)
+		for (int i=beginIndex; i<endIndex-1; i++)
 		{
-			//Insetion sort with the gap of h
-			sort(array, beginIndex, endIndex, h);
-			h = getNextH(h);
+			min = i;
+			
+			for (int j=i+1; j<endIndex; j++)
+			{
+				if (compareTo(array, j, min) < 0)
+					min = j;
+			}
+			
+			swap(array, i, min);
 		}
-	}
-	
-	public int getMaxH(int n)
-	{
-		final int upper = n / 3;	//Esitmate the upper bound of the sequence
-		int h = 1, t;
-		
-		while (true)
-		{
-			t = 3*h + 1;			//Find the next number in the sequence
-			if (t > upper) break;
-			h = t;
-		}
-		
-		return h;
-	}
-	
-	public int getNextH(int h)
-	{
-		return h / 3;
 	}
 }

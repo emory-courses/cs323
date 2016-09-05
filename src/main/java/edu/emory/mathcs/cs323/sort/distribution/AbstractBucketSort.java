@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.emory.mathcs.cs323.sort;
+package edu.emory.mathcs.cs323.sort.distribution;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
+import edu.emory.mathcs.cs323.sort.AbstractSort;
 import edu.emory.mathcs.cs323.utils.DSUtils;
 
 
@@ -33,8 +35,9 @@ public abstract class AbstractBucketSort<T extends Comparable<T>> extends Abstra
 	
 	/** @param bucketSize the total number of buckets. */
 	@SuppressWarnings("unchecked")
-	public AbstractBucketSort(int bucketSize, boolean sort)
+	public AbstractBucketSort(int bucketSize, boolean sort, Comparator<T> comparator)
 	{
+		super(comparator);
 		g_buckets = (List<T>[])DSUtils.createEmptyListArray(bucketSize);
 		b_sort = sort;
 	}

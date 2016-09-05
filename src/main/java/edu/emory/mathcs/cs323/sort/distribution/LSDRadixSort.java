@@ -13,30 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.emory.mathcs.cs323.sort;
+package edu.emory.mathcs.cs323.sort.distribution;
 
+import java.util.Comparator;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class SelectionSort<T extends Comparable<T>> extends AbstractSort<T>
+public class LSDRadixSort extends AbstractBucketSort<Integer>
 {
-	@Override
-	public void sort(T[] array, final int beginIndex, final int endIndex)
+	private final int MAX;
+	private int i_div;
+	
+	public LSDRadixSort(int maxDigits)
 	{
-		int min;
-		
-		for (int i=beginIndex; i<endIndex-1; i++)
+		super(10, true, Comparator.naturalOrder());
+		MAX = maxDigits;
+	}
+	
+	@Override
+	public void sort(Integer[] array, int beginIndex, int endIndex)
+	{
+		//Sort each LSD
+		for (int i=0; i<MAX; i++)
 		{
-			min = i;
-			
-			for (int j=i+1; j<endIndex; j++)
-			{
-				if (compareTo(array, j, min) < 0)
-					min = j;
-			}
-			
-			swap(array, i, min);
+			i_div = (int)Math.pow(10, i);
+			super.sort(array, beginIndex, endIndex);
 		}
+	}
+	
+	@Override
+	protected int getBucketIndex(Integer key)
+	{
+		return (key / i_div) % 10;
 	}
 }

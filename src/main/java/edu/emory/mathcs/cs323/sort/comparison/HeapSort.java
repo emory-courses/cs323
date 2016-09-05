@@ -13,24 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.emory.mathcs.cs323.sort;
+package edu.emory.mathcs.cs323.sort.comparison;
 
+import java.util.Comparator;
 
-
+import edu.emory.mathcs.cs323.sort.AbstractSort;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
 public class HeapSort<T extends Comparable<T>> extends AbstractSort<T>
 {
+	public HeapSort()
+	{
+		this(Comparator.naturalOrder());
+	}
+	
+	public HeapSort(Comparator<T> comparator)
+	{
+		super(comparator);
+	}
+	
 	@Override
 	public void sort(T[] array, int beginIndex, int endIndex)
 	{
-		//Heapigy all elements
+		// heapify all elements
 		for (int k=getParentIndex(beginIndex, endIndex); k>=beginIndex; k--)
 			sink(array, k, beginIndex, endIndex);
 		
-		//Swap the endIndex element with the root element and sink it
+		// swap the endIndex element with the root element and sink it
 		while (endIndex > beginIndex+1)
 		{
 			swap(array, beginIndex, --endIndex);

@@ -13,9 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.emory.mathcs.cs323.sort;
+package edu.emory.mathcs.cs323.sort.divide_conquer;
 
 import java.util.Arrays;
+import java.util.Comparator;
+
+import edu.emory.mathcs.cs323.sort.AbstractSort;
 
 
 /**
@@ -23,7 +26,18 @@ import java.util.Arrays;
  */
 public class MergeSort<T extends Comparable<T>> extends AbstractSort<T>
 {
-	private T[] l_temp;	// n-extra spaces
+	/** n-extra spaces. */
+	private T[] l_temp;
+	
+	public MergeSort()
+	{
+		this(Comparator.naturalOrder());
+	}
+	
+	public MergeSort(Comparator<T> comparator)
+	{
+		super(comparator);
+	}
 	
 	@Override
 	public void sort(T[] array, int beginIndex, int endIndex)
@@ -31,11 +45,11 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSort<T>
 		if (beginIndex + 1 >= endIndex) return;
 		int middleIndex = beginIndex + (endIndex - beginIndex) / 2;
 
-		//Sort left partition
+		// sort left partition
 		sort (array, beginIndex, middleIndex);
-		//Sort Right partition
+		// sort Right partition
 		sort (array, middleIndex, endIndex);
-		//Merge partitions
+		// merge partitions
 		merge(array, beginIndex, middleIndex, endIndex);
 	}
 	
@@ -74,6 +88,6 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSort<T>
 			System.arraycopy(array, beginIndex, l_temp, beginIndex, N);
 		}
 		
-		n_assignments += N;
+		assignments += N;
 	}
 }

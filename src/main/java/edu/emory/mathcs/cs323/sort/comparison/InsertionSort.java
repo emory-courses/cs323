@@ -13,15 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.emory.mathcs.cs323.sort;
+package edu.emory.mathcs.cs323.sort.comparison;
 
+import java.util.Comparator;
 
+import edu.emory.mathcs.cs323.sort.AbstractSort;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
 public class InsertionSort<T extends Comparable<T>> extends AbstractSort<T>
 {
+	public InsertionSort()
+	{
+		this(Comparator.naturalOrder());
+	}
+	
+	public InsertionSort(Comparator<T> comparator)
+	{
+		super(comparator);
+	}
+	
 	@Override
 	public void sort(T[] array, int beginIndex, int endIndex)
 	{
