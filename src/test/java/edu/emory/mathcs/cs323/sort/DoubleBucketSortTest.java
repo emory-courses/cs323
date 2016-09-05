@@ -13,42 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.emory.mathcs.cs323.sort.distribution;
+package edu.emory.mathcs.cs323.sort;
 
-import java.util.Comparator;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Arrays;
+
+import org.junit.Test;
+
+import edu.emory.mathcs.cs323.sort.distribution.DoubleBucketSort;
+import edu.emory.mathcs.cs323.utils.DSUtils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class LSDRadixSort extends BucketSort<Integer>
+public class DoubleBucketSortTest
 {
-	private final int MAX;
-	private int div;
-	
-	public LSDRadixSort(int maxDigits)
+	@Test
+	public void test()
 	{
-		this(maxDigits, Comparator.naturalOrder());
-	}
-	
-	public LSDRadixSort(int maxDigits, Comparator<Integer> comparator)
-	{
-		super(10, true, comparator);
-		MAX = maxDigits;
-	}
-	
-	@Override
-	public void sort(Integer[] array, int beginIndex, int endIndex)
-	{
-		for (int i=0; i<MAX; i++)
-		{
-			div = (int)Math.pow(10, i);
-			super.sort(array, beginIndex, endIndex);
-		}
-	}
-	
-	@Override
-	protected int getBucketIndex(Integer key)
-	{
-		return (key / div) % 10;
+		Double[] original = {.32, .25, .51, .44, .21, .31, .17, .52};
+		Double[] sorted = Arrays.copyOf(original, original.length);
+		
+		AbstractSort<Double> s = new DoubleBucketSort(0, 1);
+		s.sort(original);
+		Arrays.sort(sorted);
+		
+		assertTrue(DSUtils.equals(original, sorted));
 	}
 }

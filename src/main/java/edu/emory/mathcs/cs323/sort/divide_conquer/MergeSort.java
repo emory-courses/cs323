@@ -27,7 +27,7 @@ import edu.emory.mathcs.cs323.sort.AbstractSort;
 public class MergeSort<T extends Comparable<T>> extends AbstractSort<T>
 {
 	/** n-extra spaces. */
-	private T[] l_temp;
+	private T[] temp;
 	
 	public MergeSort()
 	{
@@ -46,9 +46,9 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSort<T>
 		int middleIndex = beginIndex + (endIndex - beginIndex) / 2;
 
 		// sort left partition
-		sort (array, beginIndex, middleIndex);
+		sort(array, beginIndex, middleIndex);
 		// sort Right partition
-		sort (array, middleIndex, endIndex);
+		sort(array, middleIndex, endIndex);
 		// merge partitions
 		merge(array, beginIndex, middleIndex, endIndex);
 	}
@@ -66,13 +66,13 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSort<T>
 		for (int k=beginIndex; k<endIndex; k++)
 		{
 			if (fst >= middleIndex)						// no key left in the 1st half
-				assign(array, k, l_temp[snd++]);
+				assign(array, k, temp[snd++]);
 			else if (snd >= endIndex)					// no key left in the 2nd half
-				assign(array, k, l_temp[fst++]);
-			else if (compareTo(l_temp, fst, snd) < 0)	// 1st key < 2nd key
-				assign(array, k, l_temp[fst++]);
+				assign(array, k, temp[fst++]);
+			else if (compareTo(temp, fst, snd) < 0)	// 1st key < 2nd key
+				assign(array, k, temp[fst++]);
 			else
-				assign(array, k, l_temp[snd++]);
+				assign(array, k, temp[snd++]);
 		}
 	}
 	
@@ -80,12 +80,12 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSort<T>
 	{
 		int N = array.length;
 		
-		if (l_temp == null || l_temp.length < N)
-			l_temp = Arrays.copyOf(array, N);
+		if (temp == null || temp.length < N)
+			temp = Arrays.copyOf(array, N);
 		else
 		{
 			N = endIndex - beginIndex;
-			System.arraycopy(array, beginIndex, l_temp, beginIndex, N);
+			System.arraycopy(array, beginIndex, temp, beginIndex, N);
 		}
 		
 		assignments += N;

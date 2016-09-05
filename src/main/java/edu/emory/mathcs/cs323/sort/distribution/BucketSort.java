@@ -26,39 +26,35 @@ import edu.emory.mathcs.cs323.utils.DSUtils;
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public abstract class AbstractBucketSort<T extends Comparable<T>> extends AbstractSort<T>
+public abstract class BucketSort<T extends Comparable<T>> extends AbstractSort<T>
 {
 	/** The list of buckets. */
-	private List<T>[] g_buckets;
+	private List<T>[] buckets;
 	/** if {@code true}, sort each bucket. */
-	private final boolean b_sort; 
+	private final boolean sort_bucket; 
 	
 	/** @param bucketSize the total number of buckets. */
 	@SuppressWarnings("unchecked")
-	public AbstractBucketSort(int bucketSize, boolean sort, Comparator<T> comparator)
+	public BucketSort(int bucketSize, boolean sort, Comparator<T> comparator)
 	{
 		super(comparator);
-		g_buckets = (List<T>[])DSUtils.createEmptyListArray(bucketSize);
-		b_sort = sort;
+		buckets = (List<T>[])DSUtils.createEmptyListArray(bucketSize);
+		sort_bucket = sort;
 	}
 	
 	@Override
 	public void sort(T[] array, int beginIndex, int endIndex)
 	{
-		//Add each element to its corresponding bucket
+		// add each element to its corresponding bucket
 		for (int i=beginIndex; i<endIndex; i++)
-			g_buckets[getBucketIndex(array[i])].add(array[i]);
+			buckets[getBucketIndex(array[i])].add(array[i]);
 		
-		//Spit out all bucket elements and reassign array elements
-		for (List<T> bucket : g_buckets)
+		// spit out all bucket elements and reassign array elements
+		for (List<T> bucket : buckets)
 		{
-			//Sort each bucket if b_sort == true
-			if (b_sort)
-				Collections.sort(bucket);
-			
-			for (T key : bucket)
-				array[beginIndex++] = key;
-			
+			// sort each bucket if b_sort == true
+			if (sort_bucket) Collections.sort(bucket, comparator);
+			for (T key : bucket) array[beginIndex++] = key;
 			bucket.clear();
 		}
 	}

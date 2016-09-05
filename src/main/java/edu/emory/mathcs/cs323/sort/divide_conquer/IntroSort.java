@@ -22,44 +22,49 @@ import edu.emory.mathcs.cs323.sort.AbstractSort;
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class QuickSort<T extends Comparable<T>> extends AbstractSort<T>
+public class IntroSort<T extends Comparable<T>> extends QuickSort<T>
 {
-	public QuickSort()
+	private AbstractSort<T> engine;
+	
+	public IntroSort(AbstractSort<T> engine)
 	{
-		this(Comparator.naturalOrder());
+		this(engine, Comparator.naturalOrder());
 	}
 	
-	public QuickSort(Comparator<T> comparator)
+	public IntroSort(AbstractSort<T> engine, Comparator<T> comparator)
 	{
 		super(comparator);
+		this.engine = engine;
 	}
 	
 	@Override
 	public void sort(T[] array, int beginIndex, int endIndex)
 	{
-		// at least one key in the range
-		if (beginIndex >= endIndex) return;
-		
-		int pivotIndex = partition(array, beginIndex, endIndex);
-		// sort left partition
-		sort(array, beginIndex, pivotIndex);
-		// sort right partition
-		sort(array, pivotIndex+1, endIndex);
+		final int maxdepth = getMaxDepth(beginIndex, endIndex);
+		sortAux(array, beginIndex, endIndex, maxdepth);
 	}
 	
-	protected int partition(T[] array, int beginIndex, int endIndex)
+	public void sortAux(T[] array, int beginIndex, int endIndex, int maxdepth)
 	{
-		int fst = beginIndex, snd = endIndex;
+		if (beginIndex >= endIndex) return;
 		
-		while (true)
+		if (maxdepth == 0)
+			engine.sort(array, beginIndex, endIndex);
+		else
 		{
-			while (++fst < endIndex   && compareTo(array, beginIndex, fst) >= 0);	// Find where endIndex > fst > pivot 
-			while (--snd > beginIndex && compareTo(array, beginIndex, snd) <= 0);	// Find where beginIndex < snd < pivot
-			if (fst >= snd) break;
-			swap(array, fst, snd);
+			int pivotIndex = partition(array, beginIndex, endIndex);
+			sortAux(array, beginIndex, pivotIndex, maxdepth-1);
+			sortAux(array, pivotIndex+1, endIndex, maxdepth-1);
 		}
-
-		swap(array, beginIndex, snd);
-		return snd;
+	}
+	
+	protected int getMaxDepth(int beginIndex, int endIndex)
+	{
+		return 2 * (int)log2(endIndex - beginIndex);
+	}
+	
+	private double log2(int i)
+	{
+		return Math.log(i) / Math.log(2);
 	}
 }

@@ -20,9 +20,9 @@ import java.util.Comparator;
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class IntegerBucketSort extends AbstractBucketSort<Integer>
+public class IntegerBucketSort extends BucketSort<Integer>
 {
-	private final int GAP; 
+	private final int GAP;
 	
 	public IntegerBucketSort(int min, int max)
 	{

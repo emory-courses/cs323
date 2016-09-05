@@ -17,38 +17,29 @@ package edu.emory.mathcs.cs323.sort.distribution;
 
 import java.util.Comparator;
 
+
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class LSDRadixSort extends BucketSort<Integer>
+public class DoubleBucketSort extends BucketSort<Double>
 {
-	private final int MAX;
-	private int div;
+	private static final int BUCKET_SIZE = 10;
+	private final double GAP;
 	
-	public LSDRadixSort(int maxDigits)
+	public DoubleBucketSort(double min, double max)
 	{
-		this(maxDigits, Comparator.naturalOrder());
+		this(min, max, Comparator.naturalOrder());
 	}
 	
-	public LSDRadixSort(int maxDigits, Comparator<Integer> comparator)
+	public DoubleBucketSort(double min, double max, Comparator<Double> comparator)
 	{
-		super(10, true, comparator);
-		MAX = maxDigits;
-	}
-	
-	@Override
-	public void sort(Integer[] array, int beginIndex, int endIndex)
-	{
-		for (int i=0; i<MAX; i++)
-		{
-			div = (int)Math.pow(10, i);
-			super.sort(array, beginIndex, endIndex);
-		}
+		super(BUCKET_SIZE, true, comparator);
+		GAP = -min;
 	}
 	
 	@Override
-	protected int getBucketIndex(Integer key)
+	protected int getBucketIndex(Double key)
 	{
-		return (key / div) % 10;
+		return (int)((key+GAP) * BUCKET_SIZE); 
 	}
 }
