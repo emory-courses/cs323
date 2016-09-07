@@ -15,7 +15,7 @@
  */
 package edu.emory.mathcs.cs323.sort;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -70,7 +70,7 @@ public class SortTest
 			engine.sort(original);
 			Arrays.sort(sorted);
 		
-			assertTrue(DSUtils.equals(original, sorted));
+			assertArrayEquals(original, sorted);
 		}
 	}
 	

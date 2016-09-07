@@ -36,7 +36,7 @@ public abstract class AbstractBalancedBinarySearchTree<T extends Comparable<T>, 
 	@Override
 	public N remove(T key)
 	{
-		N node = findNode(n_root, key);
+		N node = findNode(root, key);
 		
 		if (node != null)
 		{

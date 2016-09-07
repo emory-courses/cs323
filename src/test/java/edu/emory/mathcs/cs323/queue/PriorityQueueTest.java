@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 
 import edu.emory.mathcs.cs323.utils.DSUtils;
+import edu.emory.mathcs.cs323.zzz.quiz.NaryHeap;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
@@ -57,7 +58,8 @@ public class PriorityQueueTest
 	@SuppressWarnings("unchecked")
 	public void testSpeed()
 	{
-		testSpeed(new LazyPriorityQueue<>(), new EagerPriorityQueue<>(), new BinaryHeap<>());
+//		testSpeed(new LazyPriorityQueue<>(), new EagerPriorityQueue<>(), new BinaryHeap<>());
+		testSpeed(new NaryHeap<>(2), new NaryHeap<>(3), new NaryHeap<>(4));
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -71,7 +73,7 @@ public class PriorityQueueTest
 		int[]    keys;
 		Random   rand;
 		
-		for (int size=100; size<=1000; size+=100)
+		for (int size=100; size<=5000; size+=100)
 		{
 			for (int k=0; k<LENGTH; k++)
 			{

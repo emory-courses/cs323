@@ -57,7 +57,7 @@ public class EagerPriorityQueue<T extends Comparable<T>> extends AbstractPriorit
 	}
 
 	@Override
-	public T removeAux()
+	protected T removeAux()
 	{
 		return keys.remove(keys.size()-1);
 	}

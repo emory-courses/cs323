@@ -51,7 +51,7 @@ public class LazyPriorityQueue<T extends Comparable<T>> extends AbstractPriority
 	}
 
 	@Override
-	public T removeAux()
+	protected T removeAux()
 	{
 		// linear search for the element with the highest priority
 		T max = Collections.max(keys, comparator);

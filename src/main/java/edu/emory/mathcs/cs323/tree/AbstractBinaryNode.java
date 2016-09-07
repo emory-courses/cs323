@@ -20,10 +20,10 @@ package edu.emory.mathcs.cs323.tree;
  */
 public abstract class AbstractBinaryNode<T extends Comparable<T>,N extends AbstractBinaryNode<T,N>>
 {
-	protected T t_key;
-	protected N n_parent;
-	protected N n_leftChild;
-	protected N n_rightChild;
+	protected T key;
+	protected N parent;
+	protected N left_child;
+	protected N right_child;
 	
 	public AbstractBinaryNode(T key)
 	{
@@ -33,27 +33,27 @@ public abstract class AbstractBinaryNode<T extends Comparable<T>,N extends Abstr
 //	============================== Getters ==============================
 	public T getKey()
 	{
-		return t_key;
+		return key;
 	}
 	
 	public N getParent()
 	{
-		return n_parent;
+		return parent;
 	}
 	
 	public N getLeftChild()
 	{
-		return n_leftChild;
+		return left_child;
 	}
 	
 	public N getRightChild()
 	{
-		return n_rightChild;
+		return right_child;
 	}
 	
 	public N getGrandParent()
 	{
-		return hasParent() ? n_parent.getParent() : null;
+		return hasParent() ? parent.getParent() : null;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -70,30 +70,31 @@ public abstract class AbstractBinaryNode<T extends Comparable<T>,N extends Abstr
 	
 	public N getUncle()
 	{
-		return hasParent() ? n_parent.getSibling() : null;
+		return hasParent() ? parent.getSibling() : null;
 	}
 
 //	============================== Setters ==============================
+	
 	public void setKey(T key)
 	{
-		t_key = key;
+		this.key = key;
 	}
 	
 	public void setParent(N node)
 	{
-		n_parent = node;
+		parent = node;
 	}
 	
 	public void setLeftChild(N node)
 	{
 		replaceParent(node);
-		n_leftChild = node;
+		left_child = node;
 	}
 	
 	public void setRightChild(N node)
 	{
 		replaceParent(node);
-		n_rightChild = node;
+		right_child = node;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -116,17 +117,17 @@ public abstract class AbstractBinaryNode<T extends Comparable<T>,N extends Abstr
 //	============================== Checks ==============================
 	public boolean hasParent()
 	{
-		return n_parent != null;
+		return parent != null;
 	}
 	
 	public boolean hasLeftChild()
 	{
-		return n_leftChild != null;
+		return left_child != null;
 	}
 	
 	public boolean hasRightChild()
 	{
-		return n_rightChild != null;
+		return right_child != null;
 	}
 	
 	public boolean hasBothChildren()
@@ -137,19 +138,18 @@ public abstract class AbstractBinaryNode<T extends Comparable<T>,N extends Abstr
 	/** @return {@code true} if the specific node is the left child of this node. */
 	public boolean isLeftChild(N node)
 	{
-		return n_leftChild == node;
+		return left_child == node;
 	}
 	
 	/** @return {@code true} if the specific node is the right child of this node. */
 	public boolean isRightChild(N node)
 	{
-		return n_rightChild == node;
+		return right_child == node;
 	}
 
-//	=================================================================
 	@Override
 	public String toString()
 	{
-		return t_key + " -> (" + n_leftChild +", " + n_rightChild +")";
+		return key + " -> (" + left_child +", " + right_child +")";
 	}
 }

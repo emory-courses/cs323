@@ -54,17 +54,8 @@ public class BinaryHeap<T extends Comparable<T>> extends AbstractPriorityQueue<T
 		swim(++size);
 	}
 	
-	private void swim(int k)
-	{
-		while (k > 1 && comparator.compare(keys.get(k/2), keys.get(k)) < 0)
-		{
-			Collections.swap(keys, k/2, k);
-			k /= 2;
-		}
-	}
-
 	@Override
-	public T removeAux()
+	protected T removeAux()
 	{
 		Collections.swap(keys, 1, size);
 		T max = keys.remove(size--);
@@ -72,6 +63,15 @@ public class BinaryHeap<T extends Comparable<T>> extends AbstractPriorityQueue<T
 		return max;
 	}
 	
+	private void swim(int k)
+	{
+		while (1 < k && comparator.compare(keys.get(k/2), keys.get(k)) < 0)
+		{
+			Collections.swap(keys, k/2, k);
+			k /= 2;
+		}
+	}
+
 	private void sink(int k)
 	{
 		for (int i=k*2; i<=size; k=i,i*=2)

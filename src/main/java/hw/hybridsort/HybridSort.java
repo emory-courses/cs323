@@ -13,22 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.emory.mathcs.cs323;
-
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-
-import edu.emory.mathcs.cs323.utils.MathUtils;
+package hw.hybridsort;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class MathUtilTest
+public interface HybridSort<T extends Comparable<T>>
 {
-	@Test
-	public void getMiddleIndexTest()
-	{
-	    assertEquals(MathUtils.getMiddleIndex(0, 10), 5);
-	}
+	T[] sort(T[][] input); 
 }

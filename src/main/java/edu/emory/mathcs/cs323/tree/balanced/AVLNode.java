@@ -23,24 +23,24 @@ import edu.emory.mathcs.cs323.tree.AbstractBinaryNode;
 public class AVLNode<T extends Comparable<T>> extends AbstractBinaryNode<T,AVLNode<T>>
 {
 	/** The height of this node. */
-	private int i_height;
+	private int height;
 	
 	public AVLNode(T key)
 	{
 		super(key);
-		i_height = 1;
+		height = 1;
 	}
 	
 //	============================== Getters ==============================
 	public int getHeight()
 	{
-		return i_height;
+		return height;
 	}
 	
 //	============================== Setters ==============================
 	public void setHeight(int height)
 	{
-		i_height = height;
+		this.height = height;
 	}
 	
 	@Override
@@ -88,17 +88,17 @@ public class AVLNode<T extends Comparable<T>> extends AbstractBinaryNode<T,AVLNo
 	public int getBalanceFactor()
 	{
 		if (hasBothChildren())
-			return n_leftChild.getHeight() - n_rightChild.getHeight();
+			return left_child.getHeight() - right_child.getHeight();
 		else if (hasLeftChild())
-			return n_leftChild.getHeight();
+			return left_child.getHeight();
 		else if (hasRightChild())
-			return -n_rightChild.getHeight();
+			return -right_child.getHeight();
 		else
 			return 0;
 	}
 	
 	public String toString()
 	{
-		return t_key+":"+i_height + " -> (" + n_leftChild +", " + n_rightChild +")";
+		return key+":"+height + " -> (" + left_child +", " + right_child +")";
 	}
 }

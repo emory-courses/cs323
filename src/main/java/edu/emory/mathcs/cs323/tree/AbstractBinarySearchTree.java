@@ -20,7 +20,7 @@ package edu.emory.mathcs.cs323.tree;
  */
 public abstract class AbstractBinarySearchTree<T extends Comparable<T>, N extends AbstractBinaryNode<T,N>>
 {
-	protected N n_root;
+	protected N root;
 	
 	public AbstractBinarySearchTree()
 	{
@@ -33,32 +33,32 @@ public abstract class AbstractBinarySearchTree<T extends Comparable<T>, N extend
 	/** @return the root of this tree. */
 	public N getRoot()
 	{
-		return n_root;
+		return root;
 	}
 	
 	/** Sets the root of this tree to the specific node. */
 	public void setRoot(N node)
 	{
 		if (node != null) node.setParent(null);
-		n_root = node;
+		root = node;
 	}
 	
 	/** @return {@code true} if the specific node is the root of this tree. */
 	public boolean isRoot(N node)
 	{
-		return n_root == node;
+		return root == node;
 	}
 	
 	/** @return the node with the specific key if exists; otherwise, {@code null}. */
 	public N get(T key)
 	{
-		return findNode(n_root, key);
+		return findNode(root, key);
 	}
 	
 	/** @return {@code true} if the specific key exists; otherwise, {@code false}. */
 	public boolean contains(T key)
 	{
-		return findNode(n_root, key) != null;
+		return findNode(root, key) != null;
 	}
 	
 //	============================== Add ==============================
@@ -71,10 +71,10 @@ public abstract class AbstractBinarySearchTree<T extends Comparable<T>, N extend
 	{
 		N node = null;
 		
-		if (n_root == null)
+		if (root == null)
 			setRoot(node = createNode(key));
 		else
-			node = addAux(n_root, key);
+			node = addAux(root, key);
 		
 		return node;
 	}
@@ -107,7 +107,7 @@ public abstract class AbstractBinarySearchTree<T extends Comparable<T>, N extend
 	/** @return the removed node with the specific key if exists; otherwise, {@code null}. */
 	public N remove(T key)
 	{
-		N node = findNode(n_root, key);
+		N node = findNode(root, key);
 		
 		if (node != null)
 		{
@@ -177,7 +177,7 @@ public abstract class AbstractBinarySearchTree<T extends Comparable<T>, N extend
 	/** @return the minimum key in this tree if exists; otherwise, {@code null}. */
 	public T min()
 	{
-		return (n_root != null) ? findMinNode(n_root).getKey() : null;
+		return (root != null) ? findMinNode(root).getKey() : null;
 	}
 	
 	/** @return the node with the minimum key under the subtree of {@code node}. */
@@ -189,7 +189,7 @@ public abstract class AbstractBinarySearchTree<T extends Comparable<T>, N extend
 	/** @return the maximum key in this tree if exists; otherwise, {@code null}. */
 	public T max()
 	{
-		return (n_root != null) ? findMaxNode(n_root).getKey() : null;
+		return (root != null) ? findMaxNode(root).getKey() : null;
 	}
 	
 	/** @return the node with the maximum key under the subtree of {@code node}. */
@@ -200,6 +200,6 @@ public abstract class AbstractBinarySearchTree<T extends Comparable<T>, N extend
 	
 	public String toString()
 	{
-		return (n_root != null) ? n_root.toString() : "null";
+		return (root != null) ? root.toString() : "null";
 	}
 }
