@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.emory.mathcs.cs323.trie.autocomplete;
+package edu.emory.mathcs.cs323.hw.autocomplete;
 
 import java.util.List;
 
