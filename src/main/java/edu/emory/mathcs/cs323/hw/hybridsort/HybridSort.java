@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package hw.hybridsort;
+package edu.emory.mathcs.cs323.hw.hybridsort;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})

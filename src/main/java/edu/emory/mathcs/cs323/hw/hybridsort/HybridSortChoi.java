@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package hw.hybridsort;
+package edu.emory.mathcs.cs323.hw.hybridsort;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;

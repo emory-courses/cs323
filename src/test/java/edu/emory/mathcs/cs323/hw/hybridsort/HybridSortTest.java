@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package hw.hybridsort;
+package edu.emory.mathcs.cs323.hw.hybridsort;
 
 import static org.junit.Assert.assertArrayEquals;
 
@@ -22,6 +22,9 @@ import java.util.Comparator;
 import java.util.Random;
 
 import org.junit.Test;
+
+import edu.emory.mathcs.cs323.hw.hybridsort.HybridSort;
+import edu.emory.mathcs.cs323.hw.hybridsort.HybridSortChoi;
 
 
 /**
