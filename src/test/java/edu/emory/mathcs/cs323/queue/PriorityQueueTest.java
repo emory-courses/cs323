@@ -59,7 +59,7 @@ public class PriorityQueueTest
 	public void testSpeed()
 	{
 //		testSpeed(new LazyPriorityQueue<>(), new EagerPriorityQueue<>(), new BinaryHeap<>());
-		testSpeed(new NaryHeap<>(2), new NaryHeap<>(3), new NaryHeap<>(4));
+		testSpeed(new NaryHeap<>(2), new NaryHeap<>(3), new NaryHeap<>(4), new NaryHeap<>(5), new NaryHeap<>(6));
 	}
 	
 	@SuppressWarnings("unchecked")
