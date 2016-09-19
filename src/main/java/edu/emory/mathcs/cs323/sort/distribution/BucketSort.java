@@ -29,7 +29,7 @@ import edu.emory.mathcs.cs323.utils.DSUtils;
 public abstract class BucketSort<T extends Comparable<T>> extends AbstractSort<T>
 {
 	/** The list of buckets. */
-	private List<T>[] buckets;
+	protected List<T>[] buckets;
 	/** if {@code true}, sort each bucket. */
 	private final boolean sort_bucket; 
 	
