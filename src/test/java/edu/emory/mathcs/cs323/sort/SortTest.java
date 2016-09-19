@@ -80,18 +80,19 @@ public class SortTest
 	{
 		final int ITERATIONS = 1000;
 		final int INIT_SIZE  = 100;
-		final int MAX_SIZE   = 1000;
+		final int MAX_SIZE   = 5000;
 		final int INCREMENT  = 100;
 		final int OPS        = 1;
 		final Random RAND    = new Random(0);
 		
 		SortSpeed comp = new SortSpeed();
-//		comp.printTotal(ITERATIONS, INIT_SIZE, MAX_SIZE, INCREMENT, OPS, RAND, new HeapSort<>(), new ShellSortKnuth<>(), new SelectionSort<>(), new InsertionSort<>());
-		comp.printTotal(ITERATIONS, INIT_SIZE, MAX_SIZE, INCREMENT, OPS, RAND, new HeapSort<>(), new ShellSortKnuth<>(), new MergeSort<>(), new QuickSort<>(), new IntroSort<>(new HeapSort<Integer>()), new IntroSort<>(new ShellSortKnuth<Integer>()));
+		comp.printTotal(ITERATIONS, INIT_SIZE, MAX_SIZE, INCREMENT, OPS, RAND, new HeapSort<>(), new ShellSortKnuth<>(), new SelectionSort<>(), new InsertionSort<>());
+//		comp.printTotal(ITERATIONS, INIT_SIZE, MAX_SIZE, INCREMENT, OPS, RAND, new HeapSort<>(), new ShellSortKnuth<>(), new MergeSort<>(), new QuickSort<>(), new IntroSort<>(new HeapSort<Integer>()), new IntroSort<>(new ShellSortKnuth<Integer>()));
 //		comp.printTotal(ITERATIONS, INIT_SIZE, MAX_SIZE, INCREMENT, OPS, RAND, new IntegerBucketSort(0, MAX_SIZE), new LSDRadixSort(getMaxBit(MAX_SIZE)), new QuickSort<>(), new HeapSort<>(), new ShellSortKnuth<>(), new MergeSort<>(), new InsertionSort<>(), new SelectionSort<>());
+//		comp.printTotal(ITERATIONS, INIT_SIZE, MAX_SIZE, INCREMENT, OPS, RAND, new ShellSortKnuth<>(), new ShellSortHibbard<>(), new ShellSortPratt<>());
 	}
 	
-	@Test
+//	@Test
 	@SuppressWarnings("unchecked")
 	public void countOperations()
 	{

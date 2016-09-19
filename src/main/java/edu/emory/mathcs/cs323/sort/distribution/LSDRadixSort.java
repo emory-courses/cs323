@@ -32,7 +32,7 @@ public class LSDRadixSort extends BucketSort<Integer>
 	
 	public LSDRadixSort(int maxDigits, Comparator<Integer> comparator)
 	{
-		super(10, true, comparator);
+		super(10, false, comparator);
 		MAX = maxDigits;
 	}
 	
