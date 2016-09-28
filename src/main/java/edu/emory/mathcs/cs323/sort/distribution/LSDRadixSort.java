@@ -16,39 +16,43 @@
 package edu.emory.mathcs.cs323.sort.distribution;
 
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class LSDRadixSort extends BucketSort<Integer>
+public class LSDRadixSort extends RadixSort
 {
-	private final int MAX;
-	private int div;
-	
-	public LSDRadixSort(int maxDigits)
+	public LSDRadixSort()
 	{
-		this(maxDigits, Comparator.naturalOrder());
+		this(Comparator.naturalOrder());
 	}
 	
-	public LSDRadixSort(int maxDigits, Comparator<Integer> comparator)
+	public LSDRadixSort(Comparator<Integer> comparator)
 	{
-		super(10, false, comparator);
-		MAX = maxDigits;
+		super(comparator);
 	}
 	
 	@Override
 	public void sort(Integer[] array, int beginIndex, int endIndex)
 	{
-		for (int i=0; i<MAX; i++)
-		{
-			div = (int)Math.pow(10, i);
-			super.sort(array, beginIndex, endIndex);
-		}
+		int maxBit = getMaxBit(array, beginIndex, endIndex);
+		
+		for (int bit=0; bit<maxBit; bit++)
+			sort(array, beginIndex, endIndex, bit);
 	}
 	
-	@Override
-	protected int getBucketIndex(Integer key)
+	private void sort(Integer[] array, int beginIndex, int endIndex, int bit)
 	{
-		return (key / div) % 10;
+		int div = (int)Math.pow(10, bit), idx;
+		
+		for (int i=beginIndex; i<endIndex; i++)
+			buckets.get(getBucketIndex(array[i], div)).add(array[i]);
+
+		for (List<Integer> bucket : buckets)
+		{
+			idx = beginIndex = beginIndex + bucket.size();
+			while (bucket.size() > 0) array[--idx] = bucket.remove(bucket.size()-1);
+		}
 	}
 }

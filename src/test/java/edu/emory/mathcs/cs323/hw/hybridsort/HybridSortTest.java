@@ -20,11 +20,9 @@ import static org.junit.Assert.assertArrayEquals;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Random;
+import java.util.StringJoiner;
 
 import org.junit.Test;
-
-import edu.emory.mathcs.cs323.hw.hybridsort.HybridSort;
-import edu.emory.mathcs.cs323.hw.hybridsort.HybridSortChoi;
 
 
 /**
@@ -42,6 +40,11 @@ public class HybridSortTest
 		
 		Integer[][] input = {{0,1,2,3},{7,6,5,4},{0,3,1,2},{4,7,6,5},{9,8,11,10}};
 		testAccuracy(input, choi, mine);
+		
+		for (int row=10; row<=20; row++)
+			for (int col=10; col<=20; col++)
+				for (int i=0; i<100; i++)
+					testAccuracy(randomInput(row, col, 0.25), choi, mine);
 	}
 
 	void testAccuracy(Integer[][] input, HybridSort<Integer> choi, HybridSort<Integer> mine)
@@ -51,17 +54,25 @@ public class HybridSortTest
 		assertArrayEquals(gold, auto);
 	}
 	
-	@Test
+//	@Test
+	@SuppressWarnings("unchecked")
 	public void testSpeed()
 	{
+		int row = 100, col = 100;
+		double ratio = 0.25;
+		
 		HybridSort<Integer> choi = new HybridSortChoi<>();
 		HybridSort<Integer> mine = new HybridSortChoi<>();
 		
-		int row = 100, col = 100;
-		double ratio = 0.1;
-		
-		long[] time = testSpeed(choi, mine, row, col, ratio); // time[0] = choi, time[1] = mine
-		System.out.printf("Row: %d, Col: %d, ratio: %4.2f\t%d\t%d", row, col, ratio, time[0], time[1]);
+//		for (col=100; col<=1500; col+=100)
+		for (row=100; row<=1500; row+=100)
+		{
+			long[] time = testSpeed(row, col, ratio, choi, mine);
+			StringJoiner join = new StringJoiner("\t");
+			join.add(String.format("Row: %d, Col: %d, ratio: %4.2f", row, col, ratio));
+			for (long t : time) join.add(Long.toString(t));
+			System.out.println(join.toString());
+		}
 	}
 	
 	/**
@@ -71,37 +82,37 @@ public class HybridSortTest
 	 * @param col the column size of the input.
 	 * @param ratio the ratio of the input to be shuffled (for the 3rd and 4th cases).
 	 */
-	long[] testSpeed(HybridSort<Integer> choi, HybridSort<Integer> mine, int row, int col, double ratio)
+	@SuppressWarnings("unchecked")
+	long[] testSpeed(int row, int col, double ratio, HybridSort<Integer>... engine)
 	{
-		long choiTime = 0, mineTime = 0, st, et;
+		long[] time = new long[engine.length];
 		final int warm = 10, iter = 100;
-		Integer[][] input0, input1;
+		Integer[][] input, t;
+		long st, et;
 		
 		for (int i=0; i<warm; i++)
 		{
-			input0 = randomInput(row, col, ratio);
-			input1 = copyOf(input0);
-			choi.sort(input0);
-			mine.sort(input1);
+			input = randomInput(row, col, ratio);
+
+			for (int j=0; j<engine.length; j++)
+				engine[j].sort(copyOf(input));
 		}
 		
 		for (int i=0; i<iter; i++)
 		{
-			input0 = randomInput(row, col, ratio);
-			input1 = copyOf(input0);
+			input = randomInput(row, col, ratio);
 			
-			st = System.currentTimeMillis();
-			choi.sort(input0);
-			et = System.currentTimeMillis();
-			choiTime += et - st;
-			
-			st = System.currentTimeMillis();
-			mine.sort(input1);
-			et = System.currentTimeMillis();
-			mineTime += et - st;
+			for (int j=0; j<engine.length; j++)
+			{
+				t = copyOf(input);
+				st = System.currentTimeMillis();
+				engine[j].sort(t);
+				et = System.currentTimeMillis();
+				time[j] += et - st;	
+			}
 		}
 		
-		return new long[]{choiTime, mineTime};
+		return time;
 	}
 	
 	Integer[][] copyOf(Integer[][] input)

@@ -25,15 +25,15 @@ import java.util.Map;
  */
 public class TrieNode<T>
 {
-	private Map<Character,TrieNode<T>> m_children;
-	private TrieNode<T> n_parent;
-	private boolean b_endState;
-	private char c_key;
-	private T t_value;
+	private Map<Character,TrieNode<T>> children;
+	private TrieNode<T> parent;
+	private boolean end_state;
+	private char key;
+	private T value;
 	
 	public TrieNode(TrieNode<T> parent, char key)
 	{
-		m_children = new HashMap<Character,TrieNode<T>>();
+		children = new HashMap<Character,TrieNode<T>>();
 		setEndState(false);
 		setParent(parent);
 		setKey(key);
@@ -43,51 +43,51 @@ public class TrieNode<T>
 //	============================== Getters ==============================
 	public TrieNode<T> getParent()
 	{
-		return n_parent;
+		return parent;
 	}
 	
 	public char getKey()
 	{
-		return c_key;
+		return key;
 	}
 	
 	public T getValue()
 	{
-		return t_value;
+		return value;
 	}
 	
 	/** @return the map whose keys and values are children's characters and nodes. */
 	public Map<Character,TrieNode<T>> getChildrenMap()
 	{
-		return m_children;
+		return children;
 	}
 	
 	public TrieNode<T> getChild(char key)
 	{
-		return m_children.get(key);
+		return children.get(key);
 	}
 	
 //	============================== Setters ==============================
 	public void setParent(TrieNode<T> node)
 	{
-		n_parent = node;
+		parent = node;
 	}
 	
 	public void setKey(char key)
 	{
-		c_key = key;
+		this.key = key;
 	}
 	
 	public T setValue(T value)
 	{
-		T tmp = t_value;
-		t_value = value;
+		T tmp = value;
+		this.value = value;
 		return tmp;
 	}
 	
-	public void setEndState(boolean isEndState)
+	public void setEndState(boolean endState)
 	{
-		b_endState = isEndState;
+		end_state = endState;
 	}
 	
 	public TrieNode<T> addChild(char key)
@@ -97,7 +97,7 @@ public class TrieNode<T>
 		if (child == null)
 		{
 			child = new TrieNode<T>(this, key);
-			m_children.put(key, child);
+			children.put(key, child);
 		}
 		
 		return child;
@@ -107,22 +107,22 @@ public class TrieNode<T>
 	/** @return {@code true}} if this node is an end state; otherwise, {@code false}. */
 	public boolean isEndState()
 	{
-		return b_endState;
+		return end_state;
 	}
 	
 	public boolean hasValue()
 	{
-		return t_value != null;
+		return value != null;
 	}
 	
 	public boolean hasChildren()
 	{
-		return !m_children.isEmpty();
+		return !children.isEmpty();
 	}
 	
 //	=================================================================	
 	public TrieNode<T> removeChild(char key)
 	{
-		return m_children.remove(key);
+		return children.remove(key);
 	}
 }

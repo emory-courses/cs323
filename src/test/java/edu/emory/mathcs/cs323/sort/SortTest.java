@@ -33,6 +33,7 @@ import edu.emory.mathcs.cs323.sort.divide_conquer.MergeSort;
 import edu.emory.mathcs.cs323.sort.divide_conquer.QuickSort;
 import edu.emory.mathcs.cs323.utils.AbstractEngineComparer;
 import edu.emory.mathcs.cs323.utils.DSUtils;
+import edu.emory.mathcs.cs323.zzz.quiz.MSDRadixSort;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
@@ -54,7 +55,8 @@ public class SortTest
 		testAccuracy(ITERATIONS, SIZE, new IntroSort<>(new HeapSort<Integer>()));
 		testAccuracy(ITERATIONS, SIZE, new IntroSort<>(new ShellSortKnuth<Integer>()));
 		testAccuracy(ITERATIONS, SIZE, new IntegerBucketSort(0, SIZE));
-		testAccuracy(ITERATIONS, SIZE, new LSDRadixSort(getMaxBit(SIZE)));
+		testAccuracy(ITERATIONS, SIZE, new LSDRadixSort());
+		testAccuracy(ITERATIONS, SIZE, new MSDRadixSort());
 	}
 	
 	void testAccuracy(final int ITERATIONS, final int SIZE, AbstractSort<Integer> engine)
@@ -74,22 +76,24 @@ public class SortTest
 		}
 	}
 	
-	@Test
+//	@Test
 	@SuppressWarnings("unchecked")
 	public void compareSpeeds()
 	{
 		final int ITERATIONS = 1000;
 		final int INIT_SIZE  = 100;
-		final int MAX_SIZE   = 5000;
+		final int MAX_SIZE   = 3000;
 		final int INCREMENT  = 100;
 		final int OPS        = 1;
 		final Random RAND    = new Random(0);
 		
 		SortSpeed comp = new SortSpeed();
-		comp.printTotal(ITERATIONS, INIT_SIZE, MAX_SIZE, INCREMENT, OPS, RAND, new HeapSort<>(), new ShellSortKnuth<>(), new SelectionSort<>(), new InsertionSort<>());
+//		comp.printTotal(ITERATIONS, INIT_SIZE, MAX_SIZE, INCREMENT, OPS, RAND, new HeapSort<>(), new ShellSortKnuth<>(), new SelectionSort<>(), new InsertionSort<>());
 //		comp.printTotal(ITERATIONS, INIT_SIZE, MAX_SIZE, INCREMENT, OPS, RAND, new HeapSort<>(), new ShellSortKnuth<>(), new MergeSort<>(), new QuickSort<>(), new IntroSort<>(new HeapSort<Integer>()), new IntroSort<>(new ShellSortKnuth<Integer>()));
-//		comp.printTotal(ITERATIONS, INIT_SIZE, MAX_SIZE, INCREMENT, OPS, RAND, new IntegerBucketSort(0, MAX_SIZE), new LSDRadixSort(getMaxBit(MAX_SIZE)), new QuickSort<>(), new HeapSort<>(), new ShellSortKnuth<>(), new MergeSort<>(), new InsertionSort<>(), new SelectionSort<>());
+		comp.printTotal(ITERATIONS, INIT_SIZE, MAX_SIZE, INCREMENT, OPS, RAND, new IntegerBucketSort(0, MAX_SIZE), new LSDRadixSort(), new QuickSort<>(), new HeapSort<>(), new ShellSortKnuth<>(), new MergeSort<>());
+//		comp.printTotal(ITERATIONS, INIT_SIZE, MAX_SIZE, INCREMENT, OPS, RAND, new IntegerBucketSort(0, MAX_SIZE), new LSDRadixSort(), new QuickSort<>());
 //		comp.printTotal(ITERATIONS, INIT_SIZE, MAX_SIZE, INCREMENT, OPS, RAND, new ShellSortKnuth<>(), new ShellSortHibbard<>(), new ShellSortPratt<>());
+//		comp.printTotal(ITERATIONS, INIT_SIZE, MAX_SIZE, INCREMENT, OPS, RAND, new QuickSort<>(), new LSDRadixSort(), new MSDRadixSort());
 	}
 	
 //	@Test
@@ -158,15 +162,5 @@ public class SortTest
 				times[i][1] += engines[i].getAssignmentCount();
 			}
 		}
-	}
-	
-	public int getMaxBit(Integer i)
-	{
-		int exp = 1;
-		
-		while (Math.pow(10, exp) <= i)
-			exp++;
-		
-		return exp;
 	}
 }

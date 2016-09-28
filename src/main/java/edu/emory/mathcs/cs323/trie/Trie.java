@@ -21,16 +21,16 @@ package edu.emory.mathcs.cs323.trie;
  */
 public class Trie<T>
 {
-	private TrieNode<T> n_root;
+	private TrieNode<T> root;
 	
 	public Trie()
 	{
-		n_root = new TrieNode<>(null, (char)0);
+		root = new TrieNode<>(null, (char)0);
 	}
 	
 	public TrieNode<T> getRoot()
 	{
-		return n_root;
+		return root;
 	}
 	
 	public T get(String key)
@@ -49,7 +49,7 @@ public class Trie<T>
 	{
 		char[] array = key.toCharArray();
 		int i, len = key.length();
-		TrieNode<T> node = n_root;
+		TrieNode<T> node = root;
 		
 		for (i=0; i<len; i++)
 			node = node.addChild(array[i]);
@@ -63,7 +63,7 @@ public class Trie<T>
 	{
 		char[] array = key.toCharArray();
 		int i, len = key.length();
-		TrieNode<T> node = n_root;
+		TrieNode<T> node = root;
 		
 		for (i=0; i<len; i++)
 		{
