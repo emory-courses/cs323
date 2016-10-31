@@ -16,11 +16,10 @@
 package edu.emory.mathcs.cs323.graph.span;
 
 import java.util.PriorityQueue;
-import java.util.Set;
 
 import edu.emory.mathcs.cs323.graph.Edge;
 import edu.emory.mathcs.cs323.graph.Graph;
-import edu.emory.mathcs.cs323.utils.DSUtils;
+import edu.emory.mathcs.cs323.set.DisjointSet;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
@@ -30,43 +29,27 @@ public class MSTKruskal implements MSTAlgorithm
 	@Override
 	public SpanningTree getMinimumSpanningTree(Graph graph)
 	{
-		Set<Integer>[] forest = createForest(graph.size());
+		DisjointSet forest = new DisjointSet(graph.size());
 		PriorityQueue<Edge> queue = createEdgePQ(graph);
 		SpanningTree tree = new SpanningTree();
-		Set<Integer> visited;
 		Edge edge;
 		
 		while (!queue.isEmpty())
 		{
 			edge = queue.poll();
-			visited = forest[edge.getTarget()];
 			
-			if (!visited.contains(edge.getSource()))
+			if (!forest.inSameSet(edge.getTarget(), edge.getSource()))
 			{
 				tree.addEdge(edge);
-				//If a spanning tree is found, break.
-				if (tree.size()+1 == graph.size()) break;
 				
-				//Merge forests
-				visited.addAll(forest[edge.getSource()]);
-				//Update all affected forests with merged forest
-				for (int i : visited) forest[i] = visited;
+				// a spanning tree is found
+				if (tree.size()+1 == graph.size()) break;
+				// merge forests
+				forest.union(edge.getTarget(), edge.getSource());
 			}
 		}
 		
 		return tree;
-	}
-	
-	/**
-	 * @param size Size of forest
-	 * @return forest that contain each vertex as a forest 
-	 */
-	@SuppressWarnings("unchecked")
-	private Set<Integer>[] createForest(int size)
-	{
-		Set<Integer>[] forest = (Set<Integer>[])DSUtils.createEmptySetArray(size);
-		for (int i=0; i<size; i++) forest[i].add(i);
-		return forest;
 	}
 	
 	/**

@@ -26,7 +26,7 @@ import edu.emory.mathcs.cs323.graph.Graph;
 public class MinimumSpanningTreeTest
 {
 	@Test
-	@Ignore
+//	@Ignore
 	public void testUndirected() throws Exception
 	{
 //		Scanner scanner = new Scanner(new FileInputStream("/Users/jdchoi/Emory/courses/CS323/tinyEWG.txt"));
