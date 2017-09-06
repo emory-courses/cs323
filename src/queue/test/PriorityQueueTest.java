@@ -13,9 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package queue;
+package queue.test;
 
 import org.junit.jupiter.api.Test;
+import queue.AbstractPriorityQueue;
+import queue.BinaryHeap;
+import queue.EagerPriorityQueue;
+import queue.LazyPriorityQueue;
 import utils.Utils;
 
 import java.util.*;
@@ -44,7 +48,7 @@ public class PriorityQueueTest
     {
         List<Integer> keys = new ArrayList<>(Arrays.asList(4,1,3,2,5,6,8,3,4,7,5,9,7));
         keys.forEach(key -> q.add(key));
-        Collections.sort(keys, sort);
+        keys.sort(sort);
         keys.forEach(key -> assertEquals(key, q.remove()));
     }
 
@@ -52,7 +56,7 @@ public class PriorityQueueTest
     void testSpeed()
     {
         testSpeed(new LazyPriorityQueue<>(), new EagerPriorityQueue<>(), new BinaryHeap<>());
-//        testSpeed(new NaryHeap<>(2), new NaryHeap<>(3), new NaryHeap<>(4), new NaryHeap<>(5), new NaryHeap<>(6));
+//      testSpeed(new NaryHeap<>(2), new NaryHeap<>(3), new NaryHeap<>(4), new NaryHeap<>(5), new NaryHeap<>(6));
     }
 
     @SafeVarargs
@@ -88,7 +92,7 @@ public class PriorityQueueTest
             build.append(size);
 
             for (long[] time : times)
-                build.append("\t"+Arrays.stream(time).mapToObj(i -> Long.toString(i)).collect(Collectors.joining("\t")));
+                build.append("\t").append(Arrays.stream(time).mapToObj(Long::toString).collect(Collectors.joining("\t")));
 
             build.append("\n");
         }

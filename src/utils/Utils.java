@@ -46,4 +46,14 @@ public class Utils
 
         return array;
     }
+
+    static public Integer[] getRandomIntegerArray(Random rand, int size, int range)
+    {
+        Integer[] array = new Integer[size];
+
+        for (int i=0; i<size; i++)
+            array[i] = rand.nextInt(range);
+
+        return array;
+    }
 }
