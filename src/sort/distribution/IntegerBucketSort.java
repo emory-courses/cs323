@@ -22,26 +22,26 @@ import java.util.Comparator;
  */
 public class IntegerBucketSort extends BucketSort<Integer>
 {
-	private final int GAP;
-	
-	public IntegerBucketSort(int min, int max)
-	{
-		this(min, max, Comparator.naturalOrder());
-	}
-	
-	/**
-	 * @param min the minimum integer (inclusive).
-	 * @param max the maximum integer (exclusive).
-	 */
-	public IntegerBucketSort(int min, int max, Comparator<Integer> comparator)
-	{
-		super(max - min, false, comparator);
-		GAP = -min;
-	}
-	
-	@Override
-	protected int getBucketIndex(Integer key)
-	{
-		return key + GAP;
-	}
+    private final int GAP;
+    
+    public IntegerBucketSort(int min, int max)
+    {
+        this(min, max, Comparator.naturalOrder());
+    }
+    
+    /**
+     * @param min the minimum integer (inclusive).
+     * @param max the maximum integer (exclusive).
+     */
+    public IntegerBucketSort(int min, int max, Comparator<Integer> comparator)
+    {
+        super(max - min, false, comparator);
+        GAP = -min;
+    }
+    
+    @Override
+    protected int getBucketIndex(Integer key)
+    {
+        return key + GAP;
+    }
 }

@@ -23,23 +23,23 @@ import java.util.Comparator;
  */
 public class DoubleBucketSort extends BucketSort<Double>
 {
-	private static final int BUCKET_SIZE = 10;
-	private final double GAP;
-	
-	public DoubleBucketSort(double min, double max)
-	{
-		this(min, max, Comparator.naturalOrder());
-	}
-	
-	public DoubleBucketSort(double min, double max, Comparator<Double> comparator)
-	{
-		super(BUCKET_SIZE, true, comparator);
-		GAP = -min;
-	}
-	
-	@Override
-	protected int getBucketIndex(Double key)
-	{
-		return (int)((key+GAP) * BUCKET_SIZE); 
-	}
+    private static final int BUCKET_SIZE = 10;
+    private final double GAP;
+    
+    public DoubleBucketSort(double min, double max)
+    {
+        this(min, max, Comparator.naturalOrder());
+    }
+    
+    public DoubleBucketSort(double min, double max, Comparator<Double> comparator)
+    {
+        super(BUCKET_SIZE, true, comparator);
+        GAP = -min;
+    }
+    
+    @Override
+    protected int getBucketIndex(Double key)
+    {
+        return (int)((key+GAP) * BUCKET_SIZE); 
+    }
 }

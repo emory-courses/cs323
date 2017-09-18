@@ -1,5 +1,5 @@
 /**
- * Copyright 2014, Emory University
+ * Copyright 2015, Emory University
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,32 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package sort.test;
-
-
-import java.util.Arrays;
-
-import org.junit.jupiter.api.Test;
-import sort.AbstractSort;
-import sort.distribution.DoubleBucketSort;
-
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+package sort.hw;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class DoubleBucketSortTest
+public interface HybridSort<T extends Comparable<T>>
 {
-    @Test
-    void test()
-    {
-        Double[] original = {.32, .25, .51, .44, .21, .31, .17, .52};
-        Double[] sorted = Arrays.copyOf(original, original.length);
-        
-        AbstractSort<Double> s = new DoubleBucketSort(0, 1);
-        s.sort(original);
-        Arrays.sort(sorted);
-
-        assertArrayEquals(original, sorted);
-    }
+	T[] sort(T[][] input); 
 }
