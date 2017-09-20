@@ -15,6 +15,8 @@
  */
 package utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -47,6 +49,11 @@ public class Utils
         return array;
     }
 
+    static public Integer[] getRandomIntegerArray(Random rand, int size)
+    {
+        return getRandomIntegerArray(rand, size, Integer.MAX_VALUE);
+    }
+
     static public Integer[] getRandomIntegerArray(Random rand, int size, int range)
     {
         Integer[] array = new Integer[size];
@@ -55,5 +62,20 @@ public class Utils
             array[i] = rand.nextInt(range);
 
         return array;
+    }
+
+    static public List<Integer> getRandomIntegerList(Random rand, int size)
+    {
+        return getRandomIntegerList(rand, size, Integer.MAX_VALUE);
+    }
+
+    static public List<Integer> getRandomIntegerList(Random rand, int size, int range)
+    {
+        List<Integer> list = new ArrayList<>(size);
+
+        for (int i=0; i<size; i++)
+            list.add(rand.nextInt(range));
+
+        return list;
     }
 }

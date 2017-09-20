@@ -25,7 +25,7 @@ public class HeapSort<T extends Comparable<T>> extends AbstractSort<T>
 {
     public HeapSort()
     {
-        this(Comparator.naturalOrder());
+        this(Comparator .naturalOrder());
     }
     
     public HeapSort(Comparator<T> comparator)
