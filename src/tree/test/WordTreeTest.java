@@ -26,34 +26,34 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class WordTreeTest
 {
-	@Test
-	void test()
-	{
-		BinarySearchTree<WordNode> tree = new BinarySearchTree<>();
-		String[] array = {"Hello","World","I","love","programming"};
-		
-		for (int i=0; i<array.length; i++)
-			tree.add(new WordNode(array[i], i));
-		
-		for (int i=0; i<array.length; i++)
-			assertEquals(i, tree.get(new WordNode(array[i], 0)).getKey().i_id);
-	}
-	
-	class WordNode implements Comparable<WordNode>
-	{
-		String s_word;
-		int i_id;
-		
-		public WordNode(String word, int id)
-		{
-			s_word = word;
-			i_id   = id; 
-		}
+    @Test
+    void test()
+    {
+        BinarySearchTree<WordNode> tree = new BinarySearchTree<>();
+        String[] array = {"Hello","World","I","love","programming"};
+        
+        for (int i=0; i<array.length; i++)
+            tree.add(new WordNode(array[i], i));
+        
+        for (int i=0; i<array.length; i++)
+            assertEquals(i, tree.get(new WordNode(array[i], 0)).getKey().i_id);
+    }
+    
+    class WordNode implements Comparable<WordNode>
+    {
+        String s_word;
+        int i_id;
+        
+        public WordNode(String word, int id)
+        {
+            s_word = word;
+            i_id   = id; 
+        }
 
-		@Override
-		public int compareTo(WordNode node)
-		{
-			return s_word.compareTo(node.s_word);
-		}
-	}
+        @Override
+        public int compareTo(WordNode node)
+        {
+            return s_word.compareTo(node.s_word);
+        }
+    }
 }
