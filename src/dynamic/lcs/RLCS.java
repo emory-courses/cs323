@@ -13,28 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package trie.autocomplete;
-
-import java.util.List;
+package dynamic.lcs;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public interface IAutocomplete<T>
+public class RLCS extends AbstractLCS
 {
-    /**
-     * @param prefix the prefix of candidate words to return.
-     * @return the list of candidate words for the specific prefix.
-     */
-    List<String> getCandidates(String prefix);
-    
-    /**
-     * Memorize the specific candidate word for the specific prefix.
-     * @param prefix the prefix.
-     * @param candidate the selected candidate for the prefix.
-     */
-    void pickCandidate(String prefix, String candidate);
-    
-    /** @return the previously inserted value if the key already exists; otherwise, the new value. */
-    T put(String key, T value);
+    @Override
+    protected String solve(char[] c, char[] d, int i, int j)
+    {
+        if (i < 0 || j < 0)
+            return "";
+        
+        if (c[i] == d[j])
+            return solve(c, d, i-1, j-1) + c[i];
+        
+        //Get the lcs through searching from the right of string c
+        String c1 = solve(c, d, i-1, j);
+        //Get the lcs through searching from the right of string d
+        String d1 = solve(c, d, i, j-1);
+        
+        return (c1.length() > d1.length()) ? c1 : d1;
+    }
 }

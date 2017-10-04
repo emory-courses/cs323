@@ -13,36 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package trie.autocomplete;
-
-import trie.Trie;
+package dynamic.hanoi;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
+
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class DummyAutocomplete extends Trie<List<String>> implements IAutocomplete<List<String>>
+public class RHanoi extends AbstractHanoi
 {
     @Override
-    public List<String> getCandidates(String prefix)
+    public List<String> solve(int n, char source, char intermediate, char destination)
     {
-        // TODO must be modified
         List<String> list = new ArrayList<>();
-        
-        list.add("These");
-        list.add("are");
-        list.add("dummy");
-        list.add("candidates");
-        
+        solve(list, n, source, intermediate, destination);
         return list;
     }
-
-    @Override
-    public void pickCandidate(String prefix, String candidate)
+    
+    private void solve(List<String> list, int n, char source, char intermediate, char destination)
     {
-        // TODO must be filled
+        if (n == 0) return;
+        
+        //Move all plates from 'source' to 'intermediate' via 'destination' as medium
+        solve(list, n-1, source, destination, intermediate);
+        
+        //Record the step
+        list.add(getKey(n, source, destination));
+        
+        //Move all plates from 'intermediate' to 'destination' via 'source' as medium
+        solve(list, n-1, intermediate, source, destination);
     }
 }

@@ -13,28 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package trie.autocomplete;
+package dynamic.lcs;
 
-import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public interface IAutocomplete<T>
+public class LCSTest
 {
-    /**
-     * @param prefix the prefix of candidate words to return.
-     * @return the list of candidate words for the specific prefix.
-     */
-    List<String> getCandidates(String prefix);
-    
-    /**
-     * Memorize the specific candidate word for the specific prefix.
-     * @param prefix the prefix.
-     * @param candidate the selected candidate for the prefix.
-     */
-    void pickCandidate(String prefix, String candidate);
-    
-    /** @return the previously inserted value if the key already exists; otherwise, the new value. */
-    T put(String key, T value);
+    @Test
+    public void compare()
+    {
+        AbstractLCS r = new RLCS();
+        AbstractLCS d = new DLCS();
+
+        String a = "ACGTCGTGT";
+        String b = "CTAGTGGAG";
+        
+        assertEquals(r.solve(a, b), d.solve(a, b));
+        
+        a = "GAATGTCCTTTCTCTAAGTCCTAAG";
+        b = "GGAGACTTACAGGAAAGAGATTCAGGATTCAGGAGGCCTACCATGAAGATCAAG";
+    }
 }

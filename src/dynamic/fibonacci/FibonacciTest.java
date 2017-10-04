@@ -13,28 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package trie.autocomplete;
+package dynamic.fibonacci;
 
-import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public interface IAutocomplete<T>
+public class FibonacciTest
 {
-    /**
-     * @param prefix the prefix of candidate words to return.
-     * @return the list of candidate words for the specific prefix.
-     */
-    List<String> getCandidates(String prefix);
-    
-    /**
-     * Memorize the specific candidate word for the specific prefix.
-     * @param prefix the prefix.
-     * @param candidate the selected candidate for the prefix.
-     */
-    void pickCandidate(String prefix, String candidate);
-    
-    /** @return the previously inserted value if the key already exists; otherwise, the new value. */
-    T put(String key, T value);
+    @Test
+    public void compare()
+    {
+        AbstractFibonacci recursive = new RFibonacci();
+        AbstractFibonacci loop      = new LFibonacci();
+        AbstractFibonacci dynamic   = new DFibonacci();
+        
+        for (int k=0; k<20; k++)
+            assertEquals(recursive.get(k), loop.get(k), dynamic.get(k));
+    }
 }

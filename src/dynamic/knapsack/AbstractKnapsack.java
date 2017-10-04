@@ -13,28 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package trie.autocomplete;
+package dynamic.knapsack;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public interface IAutocomplete<T>
+public abstract class AbstractKnapsack
 {
     /**
-     * @param prefix the prefix of candidate words to return.
-     * @return the list of candidate words for the specific prefix.
+     * @param items items to be entered into the knapsack.
+     * @param maxWeight the maximum weight that the knapsack can hold.
+     * @return a list of items maximizing the total value given {@code items} and {@code maxWeight}.
      */
-    List<String> getCandidates(String prefix);
+    public abstract List<KnapsackItem> solve(KnapsackItem[] items, int maxWeight);
     
-    /**
-     * Memorize the specific candidate word for the specific prefix.
-     * @param prefix the prefix.
-     * @param candidate the selected candidate for the prefix.
-     */
-    void pickCandidate(String prefix, String candidate);
-    
-    /** @return the previously inserted value if the key already exists; otherwise, the new value. */
-    T put(String key, T value);
+    /** @return the total value of the specific items. */
+    protected int getTotalValue(Collection<KnapsackItem> items)
+    {
+        int total = 0;
+        
+        for (KnapsackItem item : items)
+            total += item.getValue();
+        
+        return total;
+    }
 }

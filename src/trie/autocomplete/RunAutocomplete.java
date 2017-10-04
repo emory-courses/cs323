@@ -86,9 +86,8 @@ public class RunAutocomplete
         GZIPInputStream zin = new GZIPInputStream(in);
 
         // change the DummyAutocomplete to your class (e.g., ChoiAutocomplete)
-        IAutocomplete<?> auto  = new DummyAutocomplete();
+        IAutocomplete<?> auto = new DummyAutocomplete();
         RunAutocomplete run = new RunAutocomplete(auto);
-
         run.initDictionary(zin);
         run.run();
     }

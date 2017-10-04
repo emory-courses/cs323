@@ -13,28 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package trie.autocomplete;
+package dynamic.fibonacci;
 
-import java.util.List;
+import java.util.Arrays;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public interface IAutocomplete<T>
+public class DFibonacci extends AbstractFibonacci
 {
-    /**
-     * @param prefix the prefix of candidate words to return.
-     * @return the list of candidate words for the specific prefix.
-     */
-    List<String> getCandidates(String prefix);
+    @Override
+    public int get2p(int k)
+    {
+        return get2p(k, createTable(k));
+    }
     
+    private int get2p(int k, int[] table)
+    {
+        if (table[k] < 0)
+            table[k] = get2p(k-1, table) + get2p(k-2, table);
+        
+        return table[k];
+    }
+
     /**
-     * Memorize the specific candidate word for the specific prefix.
-     * @param prefix the prefix.
-     * @param candidate the selected candidate for the prefix.
+     * @param k size of dynamic table
+     * @return dynamic table
      */
-    void pickCandidate(String prefix, String candidate);
-    
-    /** @return the previously inserted value if the key already exists; otherwise, the new value. */
-    T put(String key, T value);
+    private int[] createTable(int k)
+    {
+        int[] table = new int[k+1];
+        table[0] = 0;
+        table[1] = 1;
+        
+        //Fill table[2~k] with -1 
+        Arrays.fill(table, 2, k+1, -1);
+        
+        return table;
+    }
 }

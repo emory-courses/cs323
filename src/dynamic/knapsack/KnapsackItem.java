@@ -13,28 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package trie.autocomplete;
-
-import java.util.List;
+package dynamic.knapsack;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public interface IAutocomplete<T>
+public class KnapsackItem implements Comparable<KnapsackItem>
 {
-    /**
-     * @param prefix the prefix of candidate words to return.
-     * @return the list of candidate words for the specific prefix.
-     */
-    List<String> getCandidates(String prefix);
+    private int i_weight;
+    private int i_value;
     
-    /**
-     * Memorize the specific candidate word for the specific prefix.
-     * @param prefix the prefix.
-     * @param candidate the selected candidate for the prefix.
-     */
-    void pickCandidate(String prefix, String candidate);
+    public KnapsackItem(int weight, int value)
+    {
+        set(weight, value);
+    }
     
-    /** @return the previously inserted value if the key already exists; otherwise, the new value. */
-    T put(String key, T value);
+    public void set(int weight, int value)
+    {
+        i_weight = weight;
+        i_value  = value;
+    }
+    
+    public int getWeight()
+    {
+        return i_weight;
+    }
+    
+    public int getValue()
+    {
+        return i_value;
+    }
+
+    @Override
+    public int compareTo(KnapsackItem o)
+    {
+        return i_weight - o.i_weight;
+    }
 }

@@ -13,28 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package trie.autocomplete;
-
-import java.util.List;
+package dynamic.fibonacci;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public interface IAutocomplete<T>
+public abstract class AbstractFibonacci
 {
     /**
-     * @param prefix the prefix of candidate words to return.
-     * @return the list of candidate words for the specific prefix.
+     * @return the k'th Fibonacci number.
+     * @throws IllegalArgumentException if {@code k < 0}.
      */
-    List<String> getCandidates(String prefix);
+    public int get(int k)
+    {
+        if (k < 0) throw new IllegalArgumentException("Invalid: "+k);
+
+        switch (k)
+        {
+            //Base cases of Fibonacci sequence
+            case 0 : return 0;
+            case 1 : return 1;
+            
+            default: return get2p(k);
+        }
+    }
     
     /**
-     * Memorize the specific candidate word for the specific prefix.
-     * @param prefix the prefix.
-     * @param candidate the selected candidate for the prefix.
+     * @param k must be greater than 1.
+     * @return the k'th Fibonacci number.
      */
-    void pickCandidate(String prefix, String candidate);
-    
-    /** @return the previously inserted value if the key already exists; otherwise, the new value. */
-    T put(String key, T value);
+    protected abstract int get2p(int k);
 }
