@@ -21,35 +21,36 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.List;
-import java.util.StringJoiner;
 import java.util.stream.Collectors;
 import java.util.zip.GZIPInputStream;
-import java.util.zip.ZipInputStream;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
 public class RunAutocomplete
 {
-    private IAutocomplete<?> t_auto;
+    private IAutocomplete<?> auto_complete;
     
     public RunAutocomplete()
     {
-        t_auto = new DummyAutocomplete();
+        auto_complete = new DummyAutocomplete();
     }
 
     public RunAutocomplete(IAutocomplete<?> auto)
     {
-        t_auto = auto;
+        auto_complete = auto;
     }
     
-    public void putDictionary(InputStream in) throws Exception
+    public void initDictionary(InputStream in) throws Exception
     {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         String line;
-        
-        while ((line = reader.readLine()) != null)
-            t_auto.put(line.trim(), null);
+        int count;
+
+        for (count=0; (line = reader.readLine()) != null; count++)
+            auto_complete.put(line.trim(), null);
+
+        System.out.println("# of initial words: "+count);
     }
     
     public void run() throws Exception
@@ -64,14 +65,14 @@ public class RunAutocomplete
             prefix = reader.readLine();
             
             // TODO: print out the top 10 candidates
-            candidates = t_auto.getCandidates(prefix);
+            candidates = auto_complete.getCandidates(prefix);
             System.out.println(candidates.stream().collect(Collectors.joining("\n")));
             
-            System.out.print("Pick: ");
+            System.out.print("\nPick: ");
             pick = reader.readLine();
             
             // TODO: update your Trie with this pick.
-            t_auto.pickCandidate(prefix, pick);
+            auto_complete.pickCandidate(prefix, pick);
             System.out.println("\""+pick+"\" is learned.\n");
         }
         while (true);
@@ -79,20 +80,16 @@ public class RunAutocomplete
 
     static public void main(String[] args) throws Exception
     {
-//        FileInputStream zin = new FileInputStream("/Users/jdchoi/workspace/cs323/dat/dict.txt");
-//        URL url = new URL("https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt");
+        // change the path to a local file if you have no internet connection
+        final String filepath = "https://raw.githubusercontent.com/emory-courses/cs323/master/dat/word-list.txt.gz";
+        InputStream in = filepath.startsWith("http") ? new URL(filepath).openStream() : new FileInputStream(filepath);
+        GZIPInputStream zin = new GZIPInputStream(in);
 
-        GZIPInputStream gin = new GZIPInputStream(new FileInputStream("/Users/jdchoi/workspace/cs323/dat/word-list.txt.gz"));
-        BufferedReader reader = new BufferedReader(new InputStreamReader(gin));
-        String line;
+        // change the DummyAutocomplete to your class (e.g., ChoiAutocomplete)
+        IAutocomplete<?> auto  = new DummyAutocomplete();
+        RunAutocomplete run = new RunAutocomplete(auto);
 
-        while ((line = reader.readLine()) != null)
-            System.out.println(line);
-
-        System.out.println("DONE");
-
-//        RunAutocomplete tr = new RunAutocomplete();
-//        tr.putDictionary(new FileInputStream(dictFile));
-//        tr.run();
+        run.initDictionary(zin);
+        run.run();
     }
 }
