@@ -13,9 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package dynamic.knapsack;
+package dynamic.test;
 
 
+import dynamic.knapsack.AbstractKnapsack;
+import dynamic.knapsack.DKnapsack;
+import dynamic.knapsack.KnapsackItem;
+import dynamic.knapsack.RKnapsack;
 import dynamic.knapsack.coin.*;
 import org.junit.jupiter.api.Test;
 

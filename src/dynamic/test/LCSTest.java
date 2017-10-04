@@ -13,9 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package dynamic.lcs;
+package dynamic.test;
 
 
+import dynamic.lcs.AbstractLCS;
+import dynamic.lcs.DLCS;
+import dynamic.lcs.RLCS;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

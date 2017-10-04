@@ -13,9 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package dynamic.fibonacci;
+package dynamic.test;
 
 
+import dynamic.fibonacci.AbstractFibonacci;
+import dynamic.fibonacci.DFibonacci;
+import dynamic.fibonacci.LFibonacci;
+import dynamic.fibonacci.RFibonacci;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -13,9 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package dynamic.hanoi;
+package dynamic.test;
 
 
+import dynamic.hanoi.AbstractHanoi;
+import dynamic.hanoi.DHanoi;
+import dynamic.hanoi.RHanoi;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
