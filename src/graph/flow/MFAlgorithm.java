@@ -1,5 +1,5 @@
 /**
- * Copyright 2015, Emory University
+ * Copyright 2014, Emory University
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,25 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package trie.autocomplete;
+package graph.flow;
+
+import graph.Graph;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class CandidateCountPair implements Comparable<CandidateCountPair>
+public abstract class MFAlgorithm
 {
-    public String candidate;
-    public int    count;
-    
-    public CandidateCountPair(String candidate, int count)
-    {
-        this.candidate = candidate;
-        this.count = count;
-    }
-
-    @Override
-    public int compareTo(CandidateCountPair o)
-    {
-        return count - o.count;
-    }
+    /**
+     * @param graph a graph.
+     * @param source the source vertex.
+     * @param target the target vertex.
+     * @return the maximum flow from the source to the target vertices.
+     */
+    public abstract MaxFlow getMaximumFlow(Graph graph, int source, int target);
 }

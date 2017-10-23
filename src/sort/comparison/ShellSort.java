@@ -26,7 +26,7 @@ public abstract class ShellSort<T extends Comparable<T>> extends InsertionSort<T
 {
     protected List<Integer> sequence;
     
-    /** @param n the max-number of items in the list to be sorted. */
+    /** @param n the maxLength-number of items in the list to be sorted. */
     public ShellSort(Comparator<T> comparator, int n)
     {
         super(comparator);

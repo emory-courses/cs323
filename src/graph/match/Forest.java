@@ -13,25 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package trie.autocomplete;
+package graph.match;
+
+import java.util.Set;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class CandidateCountPair implements Comparable<CandidateCountPair>
+public interface Forest
 {
-    public String candidate;
-    public int    count;
-    
-    public CandidateCountPair(String candidate, int count)
-    {
-        this.candidate = candidate;
-        this.count = count;
-    }
-
-    @Override
-    public int compareTo(CandidateCountPair o)
-    {
-        return count - o.count;
-    }
+	/** @return the tree containing the vertex if exists; otherwise, null. */
+	Tree getTree(int vertex);
+	
+	/** Adds the tree to this forest. */
+	void addTree(Tree tree);
+	
+	/** @return an unmarked vertex in this forest whose distance to the root is even if exists; otherwise, -1. */
+	int getUnmarkedVertex(Set<Integer> unmarkedVertices);
+	
+	/** @return true if this forest contains the vertex; otherwise, false. */
+	boolean containsVertex(int vertex);
+	
+	/** @return true if this forest contains the vertex and its distance to the root is even; otherwise, false. */
+	boolean isEvenDistance(int vertex);
 }

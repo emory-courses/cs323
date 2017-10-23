@@ -13,25 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package trie.autocomplete;
+package graph.path;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class CandidateCountPair implements Comparable<CandidateCountPair>
+public class VertexDistancePair implements Comparable<VertexDistancePair>
 {
-    public String candidate;
-    public int    count;
+    public int    vertex;
+    public double distance;
     
-    public CandidateCountPair(String candidate, int count)
+    public VertexDistancePair(int vertex, double distance)
     {
-        this.candidate = candidate;
-        this.count = count;
+        this.vertex = vertex;
+        this.distance = distance;
     }
 
     @Override
-    public int compareTo(CandidateCountPair o)
+    public int compareTo(VertexDistancePair p)
     {
-        return count - o.count;
+        double diff = this.distance - p.distance;
+        if (diff > 0) return  1;
+        if (diff < 0) return -1;
+        return 0;
     }
 }

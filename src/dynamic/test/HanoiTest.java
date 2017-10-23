@@ -19,7 +19,6 @@ package dynamic.test;
 import dynamic.hanoi.AbstractHanoi;
 import dynamic.hanoi.DHanoi;
 import dynamic.hanoi.RHanoi;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -46,8 +45,7 @@ public class HanoiTest
 			assertEquals(recursive.solve(k, source, intermediate, destination), dynamic.solve(k, source, intermediate, destination));
 	}
 	
-	@Test
-	@Ignore
+//	@Test
 	public void testSpeed()
 	{
 		final int ITERATIONS = 100;

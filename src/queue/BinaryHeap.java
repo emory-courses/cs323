@@ -41,6 +41,11 @@ public class BinaryHeap<T extends Comparable<T>> extends AbstractPriorityQueue<T
         size = 0;
     }
 
+    public List<T> getKeys()
+    {
+        return keys;
+    }
+
     @Override
     public int size()
     {
@@ -53,7 +58,7 @@ public class BinaryHeap<T extends Comparable<T>> extends AbstractPriorityQueue<T
         keys.add(key);
         swim(++size);
     }
-    
+
     @Override
     protected T removeAux()
     {

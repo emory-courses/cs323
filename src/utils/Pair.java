@@ -1,5 +1,5 @@
 /**
- * Copyright 2015, Emory University
+ * Copyright 2014, Emory University
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,25 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package trie.autocomplete;
+package utils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class CandidateCountPair implements Comparable<CandidateCountPair>
+public class Pair<T1,T2>
 {
-    public String candidate;
-    public int    count;
+    public T1 fst;
+    public T2 snd;
     
-    public CandidateCountPair(String candidate, int count)
+    public Pair(T1 fst, T2 snd)
     {
-        this.candidate = candidate;
-        this.count = count;
-    }
-
-    @Override
-    public int compareTo(CandidateCountPair o)
-    {
-        return count - o.count;
+        this.fst = fst;
+        this.snd = snd;
     }
 }

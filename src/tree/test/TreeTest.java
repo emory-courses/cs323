@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Random;
 
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 import tree.balanced.AVLTree;
 import tree.balanced.RedBlackTree;
@@ -72,8 +71,7 @@ public class TreeTest
         System.out.println(tree.toString());
     }
     
-    @Test
-    @Ignore
+//    @Test
     void testAVLTree()
     {
         AVLTree<Integer> tree = new AVLTree<>();
@@ -136,8 +134,7 @@ public class TreeTest
         assertEquals(5, tree.remove(5).getKey().intValue());    // root
     }
     
-    @Test
-    @Ignore
+//    @Test
     void testAccuracy()
     {
         testAccuracy(1000, 1000, new BinarySearchTree<>());

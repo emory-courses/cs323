@@ -1,5 +1,5 @@
 /**
- * Copyright 2015, Emory University
+ * Copyright 2014, Emory University
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,25 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package trie.autocomplete;
+package graph.test;
+
+
+import graph.Graph;
+import graph.path.Dijkstra;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class CandidateCountPair implements Comparable<CandidateCountPair>
+public class PathDijkstraTest
 {
-    public String candidate;
-    public int    count;
-    
-    public CandidateCountPair(String candidate, int count)
+    @Test
+    public void test()
     {
-        this.candidate = candidate;
-        this.count = count;
-    }
-
-    @Override
-    public int compareTo(CandidateCountPair o)
-    {
-        return count - o.count;
+        Dijkstra d = new Dijkstra();
+        Graph g = new Graph(6);
+        
+        g.setDirectedEdge(0, 1, 4);
+        g.setDirectedEdge(0, 2, 2);
+        g.setDirectedEdge(1, 2, 5);
+        g.setDirectedEdge(1, 3, 10);
+        g.setDirectedEdge(2, 4, 3);
+        g.setDirectedEdge(3, 5, 3);
+        g.setDirectedEdge(4, 3, 4);
+        g.setDirectedEdge(4, 5, 9);
+        
+        System.out.println(d.getShortestPath(g, 0, 5));
     }
 }

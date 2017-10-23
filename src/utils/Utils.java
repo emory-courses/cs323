@@ -15,9 +15,7 @@
  */
 package utils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
@@ -77,5 +75,51 @@ public class Utils
             list.add(rand.nextInt(range));
 
         return list;
+    }
+
+    static public <T>Deque<?>[] createEmptyDequeArray(int size)
+    {
+        Deque<?>[] deque = new ArrayDeque<?>[size];
+
+        for (int i=0; i<size; i++)
+            deque[i] = new ArrayDeque<T>();
+
+        return deque;
+    }
+
+    static public <T>List<?>[] createEmptyListArray(int size)
+    {
+        List<?>[] array = new ArrayList<?>[size];
+
+        for (int i=0; i<size; i++)
+            array[i] = new ArrayList<T>();
+
+        return array;
+    }
+
+    static public String join(long[] array, String delim)
+    {
+        StringBuilder build = new StringBuilder();
+
+        for (long item : array)
+        {
+            build.append(delim);
+            build.append(item);
+        }
+
+        return build.substring(delim.length());
+    }
+
+    static public <T>String join(List<T> list, String delim)
+    {
+        StringBuilder build = new StringBuilder();
+
+        for (T item : list)
+        {
+            build.append(delim);
+            build.append(item);
+        }
+
+        return build.length() > delim.length() ? build.substring(delim.length()) : "";
     }
 }

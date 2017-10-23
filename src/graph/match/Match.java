@@ -13,25 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package trie.autocomplete;
+package graph.match;
+
+
+import graph.Edge;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class CandidateCountPair implements Comparable<CandidateCountPair>
+public interface Match
 {
-    public String candidate;
-    public int    count;
-    
-    public CandidateCountPair(String candidate, int count)
-    {
-        this.candidate = candidate;
-        this.count = count;
-    }
+    /** Adds the edge to this match. */
+    void addEdge(Edge edge);
 
-    @Override
-    public int compareTo(CandidateCountPair o)
-    {
-        return count - o.count;
-    }
+    /** @return true if this match contains the vertex. */
+    boolean containsVertex(int vertex);
+    
+    /** @return true if this match contains the edge. */
+    boolean containsEdge(Edge edge);
+    
+    /** @return the edge matched to the vertex. */
+    Edge getMatchedEdge(int vertex);
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright 2015, Emory University
+ * Copyright 2014, Emory University
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,25 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package trie.autocomplete;
+package graph.path;
+
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class CandidateCountPair implements Comparable<CandidateCountPair>
+public class Dijkstra extends AStar
 {
-    public String candidate;
-    public int    count;
-    
-    public CandidateCountPair(String candidate, int count)
-    {
-        this.candidate = candidate;
-        this.count = count;
-    }
-
+    /*
+     * Dijkstra's algorithm is a more specific A* algorithm with the heuristic of 0
+     */
     @Override
-    public int compareTo(CandidateCountPair o)
+    protected double heuristic(int source, int target)
     {
-        return count - o.count;
+        return 0;
     }
 }

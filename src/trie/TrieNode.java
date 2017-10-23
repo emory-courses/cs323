@@ -80,7 +80,7 @@ public class TrieNode<T>
     
     public T setValue(T value)
     {
-        T tmp = value;
+        T tmp = this.value;
         this.value = value;
         return tmp;
     }

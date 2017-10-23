@@ -1,5 +1,5 @@
 /**
- * Copyright 2015, Emory University
+ * Copyright 2014, Emory University
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,25 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package trie.autocomplete;
+package graph.span;
+
+import graph.Graph;
+
+import java.util.List;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class CandidateCountPair implements Comparable<CandidateCountPair>
+public interface MSTAll
 {
-    public String candidate;
-    public int    count;
-    
-    public CandidateCountPair(String candidate, int count)
-    {
-        this.candidate = candidate;
-        this.count = count;
-    }
-
-    @Override
-    public int compareTo(CandidateCountPair o)
-    {
-        return count - o.count;
-    }
+    /**
+     * @param graph an undirected graph containing zero to many spanning trees.
+     * @return list of all minimum spanning trees.
+     */
+    public List<SpanningTree> getMinimumSpanningTrees(Graph graph);
 }
